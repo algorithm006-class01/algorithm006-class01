@@ -1,5 +1,5 @@
 //https://leetcode-cn.com/problems/swap-nodes-in-pairs/
-package LeetCode_24_373
+package swap_nodes_in_pairs_test
 
 import (
 	"github.com/stretchr/testify/assert"

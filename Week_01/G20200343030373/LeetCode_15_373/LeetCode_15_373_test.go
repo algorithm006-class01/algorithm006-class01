@@ -1,5 +1,5 @@
 //https://leetcode-cn.com/problems/3sum/
-package LeetCode_15_373
+package three_sum_test
 
 import (
 	"github.com/stretchr/testify/assert"

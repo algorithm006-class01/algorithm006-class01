@@ -1,5 +1,5 @@
 //https://leetcode-cn.com/problems/container-with-most-water/
-package LeetCode_11_373
+package container_with_most_water_t_test
 
 import (
 	"github.com/stretchr/testify/assert"

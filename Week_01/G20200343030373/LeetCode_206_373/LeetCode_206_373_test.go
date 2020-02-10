@@ -1,5 +1,5 @@
 //https://leetcode-cn.com/problems/reverse-linked-list/
-package LeetCode_206_373
+package reverse_linkedlist_test
 
 import (
 	"github.com/stretchr/testify/assert"
