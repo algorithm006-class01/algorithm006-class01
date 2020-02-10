@@ -1,1 +1,30 @@
-学习笔记
+# 极客大学 算法训练营 第六期
+- `打点`#活动#开始
+- 讲师
+    - 覃超
+- 第六期
+    - 2.10 - 4.12
+    - [课程安排](https://shimo.im/docs/K9pv9HdcJ6KkRDQh/read)
+- 任务与作业
+    - 每周日00:00-23:59
+- 每周作业
+    - 至少2道代码作业提交
+    - 一篇学习总结
+    - code review 并点评至少5位代码作业或总结
+- [GitHub仓库](https://github.com/algorithm006-class01/algorithm006-class01)
+    - ReadMe
+    - Fork, Clone
+    - PullRequest, e.g. 373-Week 02
+    - 作业，e.g. /Week_01/G20200343030373/LeetCode_2_373/LeetCode_2_373_test.go
+    - 总结，Issues, e.g. 【373-week 03】二叉树的更多理解
+- 毕业
+    - 60分（日常作业，期中考试，期末考试）
+    - 毕业总结
+    - 视频观看超80%
+- 优秀学员
+    - 90分
+    - 20分钟以上分享
+- 优秀小组
+- 助教
+    - 吴铮
+    - 金泽
