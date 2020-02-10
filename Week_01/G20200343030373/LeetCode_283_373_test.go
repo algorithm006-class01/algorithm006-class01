@@ -1,5 +1,5 @@
 //https://leetcode-cn.com/problems/move-zeroes/
-package array_test
+package week1
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -13,15 +13,15 @@ func TestMoveZeroes(t *testing.T) {
 	assert.Equal(t, expect, nums)
 
 	nums = []int{0, 1, 0, 3, 12}
-	method1(nums)
+	countNoneZero(nums)
 	assert.Equal(t, expect, nums)
 
 	nums = []int{0, 1, 0, 3, 12}
-	method2(nums)
+	dualPointerChange(nums)
 	assert.Equal(t, expect, nums)
 
 	nums = []int{0, 1, 0, 3, 12}
-	method3(nums)
+	dualPointerSwap(nums)
 	assert.Equal(t, expect, nums)
 
 	nums1 := []int{1}
@@ -31,15 +31,16 @@ func TestMoveZeroes(t *testing.T) {
 
 func moveZeroes(nums []int) {
 	//Best
-	//其实method2就是method1考虑在一次遍历里解决问题；method3就是method2的更直接、简洁版本
-	method3(nums)
+	//其实dualPointerChange就是countNoneZero考虑在一次遍历里解决问题；
+	//dualPointerSwap就是dualPointerChange的更直接、简洁版本
+	dualPointerSwap(nums)
 }
 
 //method1: 两层循环
 //第一层循环将非零元素放到数组前面
 //第二层循环后面补零
 //worst: O(2n)
-func method1(nums []int) {
+func countNoneZero(nums []int) {
 	fast, slow := 0, 0
 	for ; fast < len(nums); fast++ {
 		if nums[fast] != 0 { //对于每一个快指针元素值不为0，要做两步操作，先将非零元素替换，再移动慢指针
@@ -57,7 +58,7 @@ func method1(nums []int) {
 //method2: 双指针
 //快指针遇到 非零 就和慢指针的数字做交换，慢指针做过一次交换后就累加，保持顺序
 //O(n)
-func method2(nums []int) {
+func dualPointerChange(nums []int) {
 	fast, slow := 0, 0
 	for ; fast < len(nums); fast++ {
 		if nums[fast] != 0 {
@@ -70,7 +71,7 @@ func method2(nums []int) {
 	}
 }
 
-func method3(nums []int) {
+func dualPointerSwap(nums []int) {
 	fast, slow := 0, 0
 	for ; fast < len(nums); fast++ {
 		if nums[fast] != 0 {
