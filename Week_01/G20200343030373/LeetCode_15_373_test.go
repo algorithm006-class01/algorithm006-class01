@@ -11,11 +11,11 @@ func TestThreeSum(t *testing.T) {
 	t.Log("Three Sum")
 
 	nums1 := []int{-1, 0, 1, 2, -1, -4}
-	except0 := [][]int{
+	except1 := [][]int{
 		{-1, -1, 2},
 		{-1, 0, 1},
 	}
-	assert.Equal(t, except0, threeSum(nums1))
+	assert.Equal(t, except1, threeSum(nums1))
 
 	nums2 := []int{0, 0, 0, 0}
 	except2 := [][]int{{0, 0, 0}}
