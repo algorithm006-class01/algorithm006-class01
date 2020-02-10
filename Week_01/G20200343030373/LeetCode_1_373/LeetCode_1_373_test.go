@@ -1,5 +1,5 @@
 //https://leetcode-cn.com/problems/two-sum/
-package week1
+package LeetCode_1_373
 
 import (
 	"github.com/stretchr/testify/assert"

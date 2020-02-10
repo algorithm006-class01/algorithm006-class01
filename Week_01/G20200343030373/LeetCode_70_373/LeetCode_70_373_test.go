@@ -1,5 +1,5 @@
 //https://leetcode-cn.com/problems/climbing-stairs/description/
-package week1
+package LeetCode_70_373
 
 import (
 	"github.com/stretchr/testify/assert"

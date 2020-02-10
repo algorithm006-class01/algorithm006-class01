@@ -1,5 +1,5 @@
 //https://leetcode-cn.com/problems/move-zeroes/
-package week1
+package LeetCode_283_373
 
 import (
 	"github.com/stretchr/testify/assert"

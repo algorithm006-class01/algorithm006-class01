@@ -1,5 +1,5 @@
 //https://leetcode-cn.com/problems/reverse-linked-list/
-package week1
+package LeetCode_206_373
 
 import (
 	"github.com/stretchr/testify/assert"

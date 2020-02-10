@@ -1,5 +1,5 @@
 //https://leetcode-cn.com/problems/container-with-most-water/
-package week1
+package LeetCode_11_373
 
 import (
 	"github.com/stretchr/testify/assert"
