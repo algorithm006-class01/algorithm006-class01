@@ -1,3 +1,26 @@
+// 第四次
+// 想清楚了逻辑，简化了代码
+int* plusOne(int* digits, int digitsSize, int* returnSize){
+
+    if (digitsSize == 0) return ;
+
+    for ( int i = digitsSize - 1; i >= 0; i-- ){
+        digits[i]++;
+        digits[i] = digits[i] % 10;
+        if (digits[i] != 0 ) {
+            *returnSize = digitsSize;
+            return digits;
+        }
+    }
+
+    int *res = (int *)malloc(sizeof(int) * (digitsSize+1));
+    res[0] = 1;
+    memcpy(res+1, digits, sizeof(int) * digitsSize);
+    *returnSize =( digitsSize + 1);
+    return res;
+
+}
+
 // 第三次
 // 在第二次的代码上进行优化，中间只要不进位，就可以退出
 
