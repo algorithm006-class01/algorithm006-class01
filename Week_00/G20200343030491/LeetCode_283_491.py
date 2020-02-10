@@ -4,7 +4,7 @@ def move_zero_index(nums):
         if nums[i] != 0 :
             nums[j] = nums[i]
             if j != i:
-                nums[0]
+                nums[i] = 0
             j += 1
 
     return nums
