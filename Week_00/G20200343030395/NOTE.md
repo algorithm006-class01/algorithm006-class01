@@ -5,3 +5,13 @@
 * 题目完成情况
 [删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 [盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/)
+* 代码片段
+
+    * 用于循环一维数组，i和j下标不重复
+    ```java
+     for(int i=0;i<length-1;++i){
+         for(int j=i+1;j<length;++j){
+             
+         }
+     }
+    ```
