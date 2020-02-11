@@ -1,14 +1,17 @@
+package Week_00.G20200343030395;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class LeetCode_1_395 {
     public static void main(String[] args) {
         int[] nums = new int[]{0,0,0,0,1,1,2,3};
-        Solution s = new Solution();
-        int num = s.removeDuplicates(nums);
+        int num = removeDuplicates(nums);
         System.out.println(num);
     }
-}
 
-class Solution {
-    public int removeDuplicates(int[] nums) {
+    public static int removeDuplicates(int[] nums) {
         if(nums.length == 1) {
             return 1;
         }
