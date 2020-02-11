@@ -15,3 +15,12 @@
          }
      }
     ```
+## 2020/2/11
+* 视频进度：今日看完了第三课3,4
+* 题目
+[3sum](https://leetcode-cn.com/problems/3sum/)
+暴力解，怎么去重？
+[环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+双指针法，1快1慢
+* 备注
+链表问题一定要考虑边界情况，node是空的情况
