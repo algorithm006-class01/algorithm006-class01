@@ -14,102 +14,127 @@
 
 //代码思路参考了 https://leetcode-cn.com/problems/design-circular-deque/solution/shu-zu-shi-xian-de-xun-huan-shuang-duan-dui-lie-by/
 
-
 typedef struct {
-	int *arr; //存放数据
-	int head; //对首
-	int rear; //队尾
-	int capacity; //容量
-
+	int *arr;
+	int head;
+	int tail;
+	int size;
+    
 } MyCircularDeque;
 
 /** Initialize your data structure here. Set the size of the deque to be k. */
-
-//浪费一个空格用于检查空间
+bool myCircularDequeIsFull(MyCircularDeque* obj);
+bool myCircularDequeIsEmpty(MyCircularDeque* obj);
 MyCircularDeque* myCircularDequeCreate(int k) {
-	MycircularDeque *obj = (MyCircularDeque *)malloc(sizeof(MyCircularDeque));
+
+	MyCircularDeque *obj = malloc(sizeof(MyCircularDeque) * (k+1));
+	obj->arr = malloc(sizeof(int) * (k+1));
 	obj->head = 0;
 	obj->tail = 0;
-	obj->arr = (int *)malloc(sizeof(int) * (k+1));
-	obj->capacity = k;
+	obj->size = k + 1;
+	return obj;
+    
 }
 
 /** Adds an item at the front of Deque. Return true if the operation is successful. */
 bool myCircularDequeInsertFront(MyCircularDeque* obj, int value) {
-	if (myCircularDequeIsFull(obj)) return false;
 
-	obj->arr[obj->rear] = value;
+	if ( myCircularDequeIsFull(obj)) return false;
 
+	int pos = (obj->head+obj->size-1) % obj->size;
+	obj->arr[pos] = value;
+	obj->head = pos;
+	return true;
 
-
+  
 }
 
 /** Adds an item at the rear of Deque. Return true if the operation is successful. */
 bool myCircularDequeInsertLast(MyCircularDeque* obj, int value) {
+	if ( myCircularDequeIsFull(obj)) return false;
 
+	obj->arr[obj->tail] = value;
+	obj->tail = (obj->tail+1) % obj->size;
+
+	return true;
+  
 }
 
 /** Deletes an item from the front of Deque. Return true if the operation is successful. */
 bool myCircularDequeDeleteFront(MyCircularDeque* obj) {
+	if ( myCircularDequeIsEmpty(obj)) return false;
 
+	obj->head = (obj->head+1) % obj->size;
+	return true;
+  
 }
 
 /** Deletes an item from the rear of Deque. Return true if the operation is successful. */
 bool myCircularDequeDeleteLast(MyCircularDeque* obj) {
-
+	if ( myCircularDequeIsEmpty(obj)) return false;
+  
+	obj->tail = (obj->tail-1+obj->size) % obj->size;
+	return true;
 }
 
 /** Get the front item from the deque. */
 int myCircularDequeGetFront(MyCircularDeque* obj) {
+	if ( myCircularDequeIsEmpty(obj) ) return -1;
 
+	return obj->arr[obj->head];
+  
 }
 
 /** Get the last item from the deque. */
 int myCircularDequeGetRear(MyCircularDeque* obj) {
+	if ( myCircularDequeIsEmpty(obj) ) return -1;
 
+	int pos = (obj->tail+obj->size-1) % obj->size;
+
+	return obj->arr[pos];
+
+  
 }
 
 /** Checks whether the circular deque is empty or not. */
 bool myCircularDequeIsEmpty(MyCircularDeque* obj) {
 
-	return obj->head == obj->rear ? true : false;
-
+	return (obj->head == obj->tail) ? true : false;
+  
 }
 
 /** Checks whether the circular deque is full or not. */
 bool myCircularDequeIsFull(MyCircularDeque* obj) {
-	//队尾追到队首
-	if ( (obj->rear + 1) % obj->capacity == obj->head) {
-		return true;
-	} else{
-		return false;
-	}
 
+	return (obj->head == (obj->tail+1) % obj->size) ? true : false;
+  
 }
 
 void myCircularDequeFree(MyCircularDeque* obj) {
 	free(obj->arr);
 	free(obj);
+	return ;
+    
 }
 
 /**
  * Your MyCircularDeque struct will be instantiated and called as such:
  * MyCircularDeque* obj = myCircularDequeCreate(k);
  * bool param_1 = myCircularDequeInsertFront(obj, value);
-
+ 
  * bool param_2 = myCircularDequeInsertLast(obj, value);
-
+ 
  * bool param_3 = myCircularDequeDeleteFront(obj);
-
+ 
  * bool param_4 = myCircularDequeDeleteLast(obj);
-
+ 
  * int param_5 = myCircularDequeGetFront(obj);
-
+ 
  * int param_6 = myCircularDequeGetRear(obj);
-
+ 
  * bool param_7 = myCircularDequeIsEmpty(obj);
-
+ 
  * bool param_8 = myCircularDequeIsFull(obj);
-
+ 
  * myCircularDequeFree(obj);
 */
