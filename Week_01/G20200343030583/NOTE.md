@@ -14,7 +14,7 @@
 - Delete: O(1)
 
 ### Skip List:
-空间换时间 <br>
+升维 + 空间换时间 <br>
 Add index for some node: 一级索引，二级索引(more coarse)，……，多级索引 <br>
 时间复杂度 O(log n) <br>
 维护成本较高。添加和删除都要重新对索引进行修改 <br>
