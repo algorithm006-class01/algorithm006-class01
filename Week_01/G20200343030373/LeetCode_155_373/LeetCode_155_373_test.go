@@ -1,3 +1,4 @@
+//https://leetcode-cn.com/problems/min-stack/
 package mini_stack_test
 
 import (
@@ -20,6 +21,7 @@ func TestMiniStack(t *testing.T) {
 //当辅助栈为空的时候直接放入新数据
 //push的时候如果该元素小于等于辅助栈顶元素，则将其推入辅助栈
 //出栈的时候如果出栈元素等于辅助栈栈顶元素辅助栈也跟着出栈
+//O(1), O(n)
 type MinStack struct {
 	data []int
 	help []int
