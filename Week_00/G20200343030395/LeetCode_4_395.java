@@ -2,7 +2,7 @@ package Week_00.G20200343030395;
 
 import java.util.Arrays;
 
-public class LeetCode_4__395 {
+public class LeetCode_4_395 {
     public static void main(String[] args) {
         int[] nums1 = new int[]{1,2,3,0,0,0};
         int[] nums2 = new int[]{2,5,6};
