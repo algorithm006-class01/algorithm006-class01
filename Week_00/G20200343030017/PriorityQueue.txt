@@ -1,0 +1,13 @@
+属性：初始容量 11
+可以从其他Collection转化为PriorityQueue
+SortedSet可以直接转化为PriorityQueue，排序保持不变
+
+initElementsFromCollection方法：
+把Collection转化为一个数组，然后遍历，如果有空的抛出异常，所以PriorityQueue不允许空值
+
+扩容：如果小于64 增加 2，如果大于64增加一倍
+增加节点：siftUp ，先增加到队列最后，然后与前面比较进行交换
+peek:不操作节点返回做前面节点
+indexOf:遍历找到指定索引的值，O(n)
+删除节点：删除指定节点，siftdown，节点和它的子节点比较，交换位置，用于调整结点
+heapify：建堆，用siftdown调整
