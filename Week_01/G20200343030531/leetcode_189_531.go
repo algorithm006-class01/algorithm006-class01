@@ -53,8 +53,12 @@ func rotate(nums []int, k int) {
 func rotate(nums []int, k int) {
 	k %= len(nums)
 	revers(&nums, 0, len(nums)-1)
-	revers(&nums, 0, k)
-	revers(&nums, k+1, len(nums)-1)
+	fmt.Println(nums)
+	revers(&nums, 0, k-1)
+	fmt.Println(nums)
+	revers(&nums, k, len(nums)-1)
+	fmt.Println(nums)
+
 	/*
 	// 全部反转
 	rotateAll(&nums)
@@ -113,5 +117,4 @@ func revers(num *[]int, start, end int)  {
 		start++
 		end--
 	}
-	fmt.Println(*num)
 }
