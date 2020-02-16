@@ -10,7 +10,9 @@ public class Solution {
                 return digits;
             }
         }
-        return {1,digits};
+        digits = new int[digits.length + 1];
+        digits[0] = 1;
+        return digits;
     }
     public void moveZeroes(int[] nums) {
         int j = 0;
