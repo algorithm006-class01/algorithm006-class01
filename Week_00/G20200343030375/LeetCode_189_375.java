@@ -1,10 +1,10 @@
-package G20200343030375.rotateArray189;
+package G20200343030375;
 
 /**
  * 第一种实现方式
  * 暴力实现
  */
-class Solution {
+class LeetCode_189_375 {
     public void rotate(int[] nums, int k) {
         for(int i=1;i<=k;++i){
             int temp = nums[nums.length-1];

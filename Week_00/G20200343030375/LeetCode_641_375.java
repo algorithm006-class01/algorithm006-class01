@@ -1,15 +1,15 @@
-package G20200343030375.deque641;
+package G20200343030375;
 
 import java.util.LinkedList;
 
-class MyCircularDeque {
+class LeetCode_641_375 {
     private int size;
     private int length;
     private Node header;
     private Node end;
 
     /** Initialize your data structure here. Set the size of the deque to be k. */
-    public MyCircularDeque(int k) {
+    public LeetCode_641_375(int k) {
         this.size =k;
         LinkedList linkedList = new LinkedList();
 
