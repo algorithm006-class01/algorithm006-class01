@@ -46,4 +46,4 @@ class Solution:
 
 
 if __name__ == '__main__':
-    print(Solution.double_pointer([1, 2, 3, 4, 5]))
+    print(Solution.double_pointer([1, 2, 3, 4, 5, 5, 5, 5]))
