@@ -2,7 +2,7 @@ package Week_01;
 
 import java.util.Arrays;
 
-public class Leetcode_026 {
+public class Leetcode_026_001 {
     public int removeDuplicates(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
@@ -23,7 +23,7 @@ public class Leetcode_026 {
 
     public static void main(String[] args) {
         RamdomArray ramdomArray = new RamdomArray();
-        Leetcode_026 solution = new Leetcode_026();
+        Leetcode_026_001 solution = new Leetcode_026_001();
 
         for (int i = 0 ; i < 15; i++) {
             int[] array = ramdomArray.generate(i, 10);

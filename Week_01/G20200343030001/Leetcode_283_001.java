@@ -2,7 +2,7 @@ package Week_01;
 
 import java.util.Arrays;
 
-public class Leetcode_283 {
+public class Leetcode_283_001 {
     public void moveZeroes(int[] nums) {
         int j = 0;
 
@@ -24,7 +24,7 @@ public class Leetcode_283 {
 
         System.out.println(Arrays.toString(arr));
 
-        new Leetcode_283().moveZeroes(arr);
+        new Leetcode_283_001().moveZeroes(arr);
 
         System.out.println(Arrays.toString(arr));
     }

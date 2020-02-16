@@ -2,10 +2,10 @@ package Week_01;
 
 import java.util.Arrays;
 
-public class Leetcode_189 {
+public class Leetcode_189_001 {
     public static void main(String[] args) {
         RamdomArray ramdomArray = new RamdomArray();
-        Leetcode_189 solution = new Leetcode_189();
+        Leetcode_189_001 solution = new Leetcode_189_001();
 
         for (int i = 0; i < 10; i++) {
             int[] arr = ramdomArray.generate(i, 100);
