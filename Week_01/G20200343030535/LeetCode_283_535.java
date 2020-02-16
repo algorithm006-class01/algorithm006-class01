@@ -1,6 +1,6 @@
 package leetcode;
 
-public class MoveZeros {
+public class LeetCode_283_535 {
 
 
     /**

@@ -1,6 +1,6 @@
 package leetcode;
 
-public class RotateArray {
+public class LeetCode_189_535 {
 
 
     /***

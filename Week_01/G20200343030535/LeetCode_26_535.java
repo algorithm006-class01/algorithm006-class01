@@ -1,6 +1,6 @@
 package leetcode;
 
-public class RemoveDuplicateSortArray {
+public class LeetCode_26_535 {
 
     /***
      * 题目：

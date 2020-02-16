@@ -3,7 +3,7 @@ package leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TowSum {
+public class LeetCode_1_535 {
 
     /***
      * 题目：

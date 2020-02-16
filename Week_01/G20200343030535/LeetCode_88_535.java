@@ -2,7 +2,7 @@ package leetcode;
 
 import java.util.Arrays;
 
-public class MergeSortedArray {
+public class LeetCode_88_535 {
 
     /***
      * 题目：

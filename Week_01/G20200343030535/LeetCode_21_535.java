@@ -2,7 +2,7 @@ package leetcode;
 
 
 
-public class MergeList {
+public class LeetCode_21_535 {
 
     /**
      * 题目：
