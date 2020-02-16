@@ -11,26 +11,19 @@ public class LeetCode_26_391 {
     }
 
     /**
-     * 双指针
+     * 双指针:慢指针j保留去重后下标，快指针i寻找下一个数字
+     * 时间复杂度：O(n)
      * @param nums
      * @return
      */
     public static int removeDuplicates_1(int[] nums) {
-        int j = 1;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == nums[j]) {
-                nums[]
+        int j = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[j]) {
+                nums[++j] = nums[i];
             }
         }
-        return j;
+        return j+1;
     }
 
-    /**
-     * 递归
-     * @param nums
-     * @return
-     */
-    public static int removeDuplicates_2(int[] nums) {
-        return 0;
-    }
 }
