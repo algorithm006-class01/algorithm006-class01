@@ -1,4 +1,4 @@
-package Week_01.G20200343030393;
+package Week_01.G20200343030395;
 
 public class LeetCode_3_395 {
 //    public static void main(String[] args) {
