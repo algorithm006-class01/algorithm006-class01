@@ -28,3 +28,10 @@ def move_zero(nums):
     nums[j:] = [0]*(len(nums)-j)
 
     return nums
+
+def move_zero_removal(nums):
+    for i in range(nums.count(0)):
+        nums.remove(0)
+        nums.append(0)
+
+    return nums
