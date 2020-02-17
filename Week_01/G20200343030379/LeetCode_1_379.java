@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * @ClassName:
  * @Description: TODO
- * @author linyb3
+ * @author ban
  * @date
  */
 public class LeetCode_1_379 {
