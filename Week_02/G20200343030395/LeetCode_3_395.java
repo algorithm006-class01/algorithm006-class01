@@ -33,6 +33,6 @@ public class LeetCode_3_395 {
         }
 
         //直接返回
-        return new ArrayList<>(map.values());
+        return new ArrayList(map.values());
     }
 }
