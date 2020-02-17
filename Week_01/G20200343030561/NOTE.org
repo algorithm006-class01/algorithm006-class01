@@ -1,0 +1,72 @@
+* 学习总结
+** Java 的基本功有些差，比如for(data_type variable:array)这样的遍历方式之前都没用过。还需要多看别人的解法多熟悉一下。
+** 看到新题 想到暴力解法也要写出来，不要不屑于暴力法，很考验基本功。
+** 看到旧题 想到怎么解了也要再解一遍，就像数学题，总是自以为会了，实则还是会犯马虎。
+** 基本功最考验两点，解题在这浪费好多时间
+*** 下标i 是否 +1 or -1
+*** 判断条件 > or < 还是 >= or <=
+
+* 源码分析
+** Queue 源码
+*** Queue
+Java中Queue为Interface，继承Collection，说明是集合家族的一员
+**** 包含如下方法：
+- add
+- offer
+- remove
+- poll
+- element
+- peek
+*** AbstractQueue
+AbstractQueue为Queue的一个实现类
+**** 封装3个方法
+- add
+- clear
+- element
+分别调用
+- offer
+- poll
+- peek
+并加以判断，抛出异常。
+**** 2个批量方法
+- clear
+- addAll
+分别调用
+- poll
+- add
+*** LinkedList
+Queue较为常用的实现方式之一
+**** 与 Queue 相关的方法
+***** offer
+offer 调用 add， add 调用 linkLast 并返回真，linkLast修改last.next、替换last、判断之前的last是否为空 为空则将新节点设为first
+***** poll
+poll 判断是否为空 不为空则调用 ulinkFirst，ulinkFirst 修改指针，将参数的item返回。
+***** peek
+判断是否为空，返回first的item。
+** Priority Queue 源码
+Java 中的 Priority Queue 使用二叉堆维护队列
+*** 入队
+add 别名 offer，offer 判断大小、调用 siftUp, siftUp 根据是否有比较器 使用不同的方法，siftUpComparable 循环比较父节点与参数的大小 并交换位置 直到出现父节点比参数小为止。
+*** 扩容
+*** 出队
+remove 调用 poll，poll 取出队首、将队尾元素设为 null --size仍大于0 将末元素做为参数调用siftDown，siftDown 根据是否有比较器调用不同的方法，siftDownComparable 循环判断 （左右子节点较小者 与 参数）的大小 若参数大则交换位置
+*** 取首
+element 调用 peek, peek 返回队首queue[0]
+* 改写示例代码-Deque
+#+begin_src java
+  Deque<Sting> deque = new LinkedList<String>();
+
+  deque.addLast("a");
+  deque.addLast("b");
+  deque.addLast("c");
+  System.out.println(deque);
+
+  String str = deque.getFirst();
+  System.out.println(str);
+  System.out.println(deque);
+
+  while(deque.size() > 0) {
+    System.out.println(deque.pollFirst());
+  }
+  System.out.println();
+#+end_src
