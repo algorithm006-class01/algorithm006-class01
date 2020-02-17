@@ -1,0 +1,123 @@
+// [641] 设计循环双端队列
+
+typedef struct {
+    int *data;
+    int capacity;
+    int head;
+    int tail;
+} MyCircularDeque;
+
+/** Initialize your data structure here. Set the size of the deque to be k. */
+
+bool myCircularDequeIsEmpty(MyCircularDeque* obj);
+bool myCircularDequeIsFull(MyCircularDeque* obj);
+
+MyCircularDeque* myCircularDequeCreate(int k) {
+    MyCircularDeque *Dq = (MyCircularDeque *)calloc(1 , sizeof(MyCircularDeque));
+    Dq -> data = (int *)calloc(k + 1, sizeof(int));
+    Dq -> capacity = k + 1;
+    Dq -> head = Dq -> tail = 0;    
+    return Dq;
+}
+
+/** Adds an item at the front of Deque. Return true if the operation is successful. */
+bool myCircularDequeInsertFront(MyCircularDeque* obj, int value) {
+    if(!myCircularDequeIsFull(obj)) {
+        obj -> head = (obj -> head - 1 + obj -> capacity) % obj -> capacity;
+        obj -> data[obj -> head] = value;
+        return true;
+    }
+    return false;
+}
+
+/** Adds an item at the rear of Deque. Return true if the operation is successful. */
+bool myCircularDequeInsertLast(MyCircularDeque* obj, int value) {
+  
+    if(!myCircularDequeIsFull(obj)) {
+        obj -> data[obj -> tail] = value;
+        obj -> tail = (obj -> tail + 1) % obj -> capacity;
+        return true;
+    }
+    return false;
+}
+
+/** Deletes an item from the front of Deque. Return true if the operation is successful. */
+bool myCircularDequeDeleteFront(MyCircularDeque* obj) {
+  
+    if(!myCircularDequeIsEmpty(obj)) {
+        obj -> head = (obj -> head + 1) % obj -> capacity; // 问题
+        return true;
+    }
+    return false;
+}
+
+/** Deletes an item from the rear of Deque. Return true if the operation is successful. */
+bool myCircularDequeDeleteLast(MyCircularDeque* obj) {
+  
+    if(!myCircularDequeIsEmpty(obj)) {
+        obj -> tail = (obj -> tail - 1 + obj -> capacity) % obj -> capacity;
+        return true;
+    }
+    return false;
+}
+
+/** Get the front item from the deque. */
+int myCircularDequeGetFront(MyCircularDeque* obj) {
+    if(myCircularDequeIsEmpty(obj)) {
+        return -1;
+    }
+  
+    return obj -> data[obj -> head];
+}
+
+/** Get the last item from the deque. */
+int myCircularDequeGetRear(MyCircularDeque* obj) {
+  
+    if(myCircularDequeIsEmpty(obj)) {
+        return -1;
+    }
+    return obj -> data[(obj -> tail - 1 + obj -> capacity) % obj -> capacity];
+}
+
+/** Checks whether the circular deque is empty or not. */
+bool myCircularDequeIsEmpty(MyCircularDeque* obj) {
+  
+    return obj -> head == obj -> tail ? true : false;
+}
+
+/** Checks whether the circular deque is full or not. */
+bool myCircularDequeIsFull(MyCircularDeque* obj) {
+  
+    return (obj -> tail + 1) % obj -> capacity == obj -> head ? true : false;
+}
+
+void myCircularDequeFree(MyCircularDeque* obj) {
+    if(obj != NULL) {
+        free(obj -> data);
+        obj -> data = NULL;
+        free(obj);
+        obj = NULL;
+    }
+}
+
+/**
+ * Your MyCircularDeque struct will be instantiated and called as such:
+ * MyCircularDeque* obj = myCircularDequeCreate(k);
+ * bool param_1 = myCircularDequeInsertFront(obj, value);
+ 
+ * bool param_2 = myCircularDequeInsertLast(obj, value);
+ 
+ * bool param_3 = myCircularDequeDeleteFront(obj);
+ 
+ * bool param_4 = myCircularDequeDeleteLast(obj);
+ 
+ * int param_5 = myCircularDequeGetFront(obj);
+ 
+ * int param_6 = myCircularDequeGetRear(obj);
+ 
+ * bool param_7 = myCircularDequeIsEmpty(obj);
+ 
+ * bool param_8 = myCircularDequeIsFull(obj);
+ 
+ * myCircularDequeFree(obj);
+*/
