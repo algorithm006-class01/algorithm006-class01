@@ -1,0 +1,2 @@
+java中的Queue是个接口，Priority实现了Queue接口。
+Priority优先队列底层实现是堆，插入需要维护元素的权值
