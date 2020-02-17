@@ -1,0 +1,9 @@
+Queue源码分析
+1. Queue接口与List、Set同一级别，都是继承了Collection接口，LinkedList实现了Deque接口
+2. 方法有add, remove， element为throw exception方法；offer, poll, peek为return special value方法
+3. 实现类有双端队列Deque，阻塞队列BlockingQueue，非阻塞队列AbstractQueue；PriorityQueue为AbstractQueue的子类
+
+Priority Queue源码分析
+1. 方法有add(E e)插入，	clear()清空，contains(Object o)检查是否包含，offer(E e)也是插入，peek()读取元素，poll()获取元素，remove(Object o)删除元素
+2. boolean add(E e) 和boolean offer(E e)区别：
+实际上add方法的内部调用的还是offer方法，所以我们主要看看offer是如何实现添加一个元素到堆结构中并维持这种结构不被破坏的。首先该方法定义了一 变量获取queue中实际存放的元素个数，紧接着一个if判断，如果该数组已经被完全使用了（没有可用空间了），会调用grow方法进行扩容，grow方法会根据具体情况判断，如果原数组较大则会扩大两倍+2，否则增加50%容量。
