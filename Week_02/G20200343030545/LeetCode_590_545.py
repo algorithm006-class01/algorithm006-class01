@@ -21,7 +21,7 @@ class Solution:
     def use_stack_and_reverse(cls, root: Node) -> List[int]:
         """
             循环实现。
-            后序遍历是左右根，前序遍历是根左右，所以将前序遍历得到结果反转一下就是后续遍历的结果
+            后序遍历是左右根，可以先输入为根右左 然后反转一下就是根左右
             时间复杂度O(n)，空间复杂度O(n)
         """
 
