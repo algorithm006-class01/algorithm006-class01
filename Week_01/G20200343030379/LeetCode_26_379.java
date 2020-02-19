@@ -1,14 +1,9 @@
-package G20200343030379;/**
- * @ClassName:
- * @Description: TODO
- * @author linyb3
- * @date
- */
+package G20200343030379;
 
 /**
  * @ClassName:
  * @Description: TODO
- * @author linyb3
+ * @author ban
  * @date
  *
  */
