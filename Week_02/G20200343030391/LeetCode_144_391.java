@@ -1,10 +1,11 @@
 package G20200343030391;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
-public class LeetCode_94_391 {
+public class LeetCode_144_391 {
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(1);
@@ -12,7 +13,7 @@ public class LeetCode_94_391 {
         TreeNode node3 = new TreeNode(3);
         node1.right = node2;
         node2.left = node3;
-        List<Integer> integers = inorderTraversalByRecursion(node1);
+        List<Integer> integers = preorderTraversalByRecursion(node1);
         System.out.println(integers);
     }
 
@@ -26,25 +27,26 @@ public class LeetCode_94_391 {
     }
 
     /**
-     * 循环遍历：stack 保存根节点，内存循环查找最左节点
+     * 循环遍历：stack 保存根节点，先访问根节点，然后循环左子树，为空则循环右子树
      * 时间复杂度：O(n)
      * @param root
      * @return
      */
-    public static List<Integer> inorderTraversalByLoop(TreeNode root) {
+    public static List<Integer> preorderTraversalByLoop(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
-        LinkedList<Integer> list = new LinkedList<>();
+        ArrayList<Integer> result = new ArrayList<>();
         TreeNode node = root;
         while (node != null || !stack.isEmpty()) {
-            while (node != null) {
+            if (node != null) {
+                result.add(node.val);
                 stack.push(node);
                 node = node.left;
+            } else {
+                TreeNode pop = stack.pop();
+                node = pop.right;
             }
-            node = stack.pop();
-            list.add(node.val);
-            node = node.right;
         }
-        return list;
+        return result;
     }
     /**
      * 递归遍历：递归查找最左节点，根节点，右节点
@@ -52,17 +54,17 @@ public class LeetCode_94_391 {
      * @param root
      * @return
      */
-    public static List<Integer> inorderTraversalByRecursion(TreeNode root) {
-        LinkedList<Integer> list = new LinkedList<>();
-        recursion(root, list);
-        return list;
+    public static List<Integer> preorderTraversalByRecursion(TreeNode root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        recursion(root, result);
+        return result;
     }
 
-    public static void recursion(TreeNode node, LinkedList<Integer> list) {
+    public static void recursion(TreeNode node, ArrayList<Integer> list) {
         if (node != null) {
-            recursion(node.left, list);
             list.add(node.val);
-            recursion(node.right,list);
+            recursion(node.left, list);
+            recursion(node.right, list);
         }
     }
 }
