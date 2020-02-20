@@ -168,8 +168,10 @@
     ```
 
 ### Matrix 矩阵求幂
-- 公式
-  <img src="src/fib-matrix.png" height="280" width="280" >
+- 公式       
+
+  <img src="src/fib-matrix.png" height="280" width="280" >  
+
 - 方案：求power(A,N)
 - 结果：可见f(n)在最终的A[0,0]上
 - 代码
@@ -238,7 +240,9 @@
     ```
 
 ## Summary 管中窥豹
+
 ### 知识点汇总
+
 #### 递归
 - 递归思路
     - 思考时不要一层层陷入
@@ -284,10 +288,11 @@
     1. 每次可以走1，2，3步
     2. 前后走的步数不能重复
     3. 每次走的步数是在一个数组里定义，且前后不重复
+    
 ### 学习方法
 #### TDD
 - 学习方法：四步拆题 与 五毒神掌
-- 其中, 在进行四步拆题时，与覃超老师不同的是，我会把测试用例提前，先写测试用例和边界，再进行编程，也就是TDD
+- 其中, 在进行四步拆题时，与覃超老师不同的是，我会把测试用例提前，先写测试用例和边界，再进行编程，直观自动判断正确与否
 - TDD, 测试驱动，单元测试，结构编程
     ```go
     func TestFib(t *testing.T) {
@@ -301,5 +306,5 @@
 - 代码
     - [Fibonacci](https://github.com/pangshusong/algorithm006-class01/blob/master/Week_02/G20200343030373/LeetCode_509_373/LeetCode_509_373_test.go)
     - [Climb Stairs](https://github.com/pangshusong/algorithm006-class01/blob/master/Week_02/G20200343030373/LeetCode_70_373/LeetCode_70_373_test.go)
-- 本文全文
-    - [Geek.Pontus.Fib]()
+- 本文
+    - [Geek.Pontus.Fib](https://github.com/pangshusong/algorithm006-class01/blob/master/Week_02/G20200343030373/geek_fib/fib.md)
