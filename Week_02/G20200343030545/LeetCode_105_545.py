@@ -30,4 +30,20 @@ class Solution:
             先序遍历  根左右
             中序遍历  左根右
         """
-        pass
+        return self.recursive(preorder, inorder)
+
+    @classmethod
+    def recursive(cls, preorder: List[int], inorder: List[int]) -> TreeNode:
+        """
+            时间复杂度：O(n)，空间复杂度：O(n)
+
+        """
+        if len(inorder):
+            root = TreeNode(preorder[0])
+
+            mid = inorder.index(preorder[0])
+
+            root.left = cls.recursive(preorder[1:mid + 1], inorder[:mid])
+            root.right = cls.recursive(preorder[mid + 1:], inorder[mid + 1:])
+
+            return root
