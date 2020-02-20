@@ -15,7 +15,20 @@ class Node:
 class Solution:
     def postorder(self, root: Node) -> List[int]:
         """左右根"""
-        pass
+        # return self.use_stack_and_reverse(root)
+        res = []
+        self.recursive(root, res)
+        return res
+
+    @classmethod
+    def recursive(cls, root: Node, res: List[int]):
+        """
+            递归的写法
+        """
+        if root:
+            for child in root.children:
+                cls.recursive(child, res)
+            res.append(root.val)
 
     @classmethod
     def use_stack_and_reverse(cls, root: Node) -> List[int]:
