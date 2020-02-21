@@ -46,6 +46,24 @@ class Solution:
             # 处理业务状态  FIXME 这里不太理解为什么要pop
             pre.pop()
 
+    @classmethod
+    def loop(cls, n, k):
+        """不理解 多练习几遍"""
+        # init first combination
+        nums = list(range(1, k + 1)) + [n + 1]
+        output, j = [], 0
+        while j < k:
+            # add current combination
+            output.append(nums[:k])
+            # increase first nums[j] by one
+            # if nums[j] + 1 != nums[j + 1]
+            j = 0
+            while j < k and nums[j + 1] == nums[j] + 1:
+                nums[j] = j + 1
+                j += 1
+            nums[j] += 1
+        return output
+
 
 if __name__ == '__main__':
-    print(Solution().combine(4, 2))
+    print(Solution.loop(4, 2))
