@@ -1,0 +1,52 @@
+* 源码分析
+** HashMap
+*** 构造函数
+*DEFAULT_LOAD_FACTOR* 默认的最大装载因子 0.75
+*table* Node<k, v>[] 存储方式为 *数组* ，涉及数组的容量
+*DEFAULT_INITIAL_CAPACITY* 数组的初始容量
+*MAXIMUM_CAPACITY* 数组的最大容量
+*putMapEntries* 当参数是map的时候调用该函数，函数内设定capacity与loadFactor，循环调用putVal存储数据
+*** 增&改
+*put* 调用hash方法并做为参数传入putVal
+*hash* 返回key的hashCode高16位异或低16位(h >>> 16)
+*putVal* (n-1)&hash为数组下标，p为数组中当前元素。
+如果p为空，将Node赋值给p
+如果p不为空，且p.key与key相同，返回旧值
+如果p不为空，且p.key与key不同，且p为TreeNode，则在TreeNode上增加p
+如果p不为空，且p.key与key不同，且p不为TreeNode，则在链表上增加p
+当增加后链表的长度大于8，调用treeifyBin
+*n-1 bitwise hash* 保证小于n，且与hash低位相同（hash低位 & 111111111），且效率远小于找最小hash再求差的方法，也小于模n取余的方法。
+*resize* 将数组大小翻倍，保证恒为2的幂（也保证了上述中n-1的低位都是1），并将数组拷贝
+*treeifyBin* 先判断是否是table太小，太小则直接resize()。循环调用replacementTreeNode将bin替换为TreeNode结构
+*replacementTreeNode* new TreeNode
+*** 删
+*remove* 调用removeNode，返回 Node.value
+*removeNode* 将table中的值（table[(n-1)&hash])赋给p
+如果p的值就是目标，将p的值赋给node
+如果p的值不是目标，但p.next不为空，且p为TreeNode，将getTreeNode赋给node
+如果p的值不是目标，但p.next不为空，且p不为TreeNode，遍历链表将值赋给node，此时p的值为链表上一节点的值
+如果node是TreeNode，调用node.removeTreeNode
+如果node等于p，将node.next赋给table的值（table[(n-1)&hash])
+如果不满足上述两个条件，将node.next赋给p.next（此时p的值为链表上一节点的值）
+返回 node
+其它情况返回 null
+*** 查
+*get* 调用getNode，返回 Node.value
+*getNode* 将table中的值（table[(n-1)&hash])赋给first
+如果first的值就是目标，返回first
+如果first.next不为空，且first为TreeNode，调用getTreeNode并返回
+如果first.next不为空，且first不为TreeNode，循环链表找到后返回
+上述条件都不满足，返回空
+*** 遍历
+*entrySet* new EntrySet
+*Entry.iterator* new EntryIterator
+*EntryIterator.next* HashIterator.nextNode
+*HashIterator* next=current=null，从i=0开始遍历table直到找到第一个不为空的值并赋给next
+*HashIterator.nextNode* e=next，current=e，next=current.next
+如果next为空，继续从i遍历table直到找到下一个不为空的值并赋给next
+返回e
+* 学习总结
+- Java基本功还是差，也是Java这门语言太繁琐了，在ArrayList<Integer>与int[]上浪费好多时间。
+- 递归（包括回溯）是有套路的，还是熟能生巧的问题。
+- 递归（包括回溯）本身就是以tree的方式思考。
+- 越底层的代码越需要位运算，(n - 1) & hash 真涨见识，我自愧写不出来。
