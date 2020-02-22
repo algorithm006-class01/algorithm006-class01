@@ -1,19 +1,18 @@
 package G20200343030391;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
 public class LeetCode_590_391 {
 
     public static void main(String[] args) {
-        Node node1 = new Node(1,new ArrayList<>());
-        Node node2 = new Node(2,new ArrayList<>());
-        Node node3 = new Node(3,new ArrayList<>());
-        Node node4 = new Node(4,new ArrayList<>());
-        Node node5 = new Node(5,new ArrayList<>());
-        Node node6 = new Node(6,new ArrayList<>());
+        Node node1 = new Node(1, new ArrayList<>());
+        Node node2 = new Node(2, new ArrayList<>());
+        Node node3 = new Node(3, new ArrayList<>());
+        Node node4 = new Node(4, new ArrayList<>());
+        Node node5 = new Node(5, new ArrayList<>());
+        Node node6 = new Node(6, new ArrayList<>());
         node1.children = new ArrayList<Node>() {{
             add(node3);
             add(node2);
@@ -27,30 +26,32 @@ public class LeetCode_590_391 {
         System.out.println(postorder);
     }
 
+    /**
+     * @param root
+     * @return
+     */
     public static List<Integer> postorderByLoop(Node root) {
-        List<Integer> res = new ArrayList<>();
-        if (root == null) return res;
-        //前指针
-        Node pre = null;
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
         Stack<Node> stack = new Stack<>();
-        stack.push(root);
+        Node node = root;
+        Node last = null;
+        stack.push(node);
         while (!stack.isEmpty()) {
-            Node cur = stack.peek();
-            if ((cur.children.size() == 0) || (pre != null && cur.children.contains(pre))) {
-                //加入结果集
-                res.add(cur.val);
-                stack.pop();
-                //更新pre指针
-                pre = cur;
-            } else {
-                //继续压栈，注意压栈是从右往左
-                List<Node> nodeList = cur.children;
-                for (int i = nodeList.size() - 1; i >= 0; i--) {
-                    stack.push(nodeList.get(i));
+            node = stack.peek();
+            if (node.children.size() > 0 && node.children.get(node.children.size() - 1) != last) {
+                for (int i = node.children.size() - 1; i >= 0; i--) {
+                    stack.add(node.children.get(i));
                 }
+            } else {
+                result.add(node.val);
+                stack.pop();
+                last = node;
             }
         }
-        return res;
+        return result;
     }
 
     public static List<Integer> postorderByRecursion(Node root) {
@@ -58,6 +59,7 @@ public class LeetCode_590_391 {
         recursion(root, result);
         return result;
     }
+
     public static void recursion(Node node, ArrayList<Integer> list) {
         if (node != null) {
             for (Node child : node.children) {
