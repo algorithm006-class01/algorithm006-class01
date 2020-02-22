@@ -1,0 +1,68 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (root==nullptr||p==nullptr||q==nullptr) {
+            return nullptr;
+        }
+
+        stack<TreeNode*> pParent;
+        stack<TreeNode*> qParent;
+
+        // find the depth of both nodes
+        inorder(root, p, pParent);
+        inorder(root, q, qParent);
+
+        stack<TreeNode*>* pLow;
+        stack<TreeNode*>* pHigh;
+
+        pParent.size()<qParent.size()?(pLow=&qParent,pHigh=&pParent):(pLow=&pParent,pHigh=&qParent);
+        
+        while (pLow->size()!=pHigh->size()) {
+            pLow->pop();
+        }
+
+        while (pLow->top()!=pHigh->top()) {
+            pLow->pop();
+            pHigh->pop();
+        }
+
+        return pLow->top();
+        
+    }
+
+    bool inorder(TreeNode* node, TreeNode* target, stack<TreeNode*>& parent) {
+        if (node!=nullptr) {
+            if (target==node) {
+                parent.push(node);
+                return true;
+            }
+        }
+
+        if (node==nullptr) {
+            return false;
+        }
+
+        parent.push(node);
+
+        if (inorder(node->left, target, parent)) {
+            return true;
+        }
+
+        if (inorder(node->right, target, parent)) {
+            return true;
+        }
+
+        parent.pop();
+
+        return false;
+    }
+};
