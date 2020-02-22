@@ -7,7 +7,7 @@ class SolutionRemoveDuplicates
      * @param Integer[] $nums
      * @return Integer
      */
-    function removeDuplicates(&$nums) {
+    public function removeDuplicates(&$nums) {
         $length = count($nums);
         if ($length <= 1) {
             return $length;
