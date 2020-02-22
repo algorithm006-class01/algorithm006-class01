@@ -34,7 +34,7 @@ class Solution:
     def use_stack_and_reverse(cls, root: Node) -> List[int]:
         """
             循环实现。
-            后序遍历是左右根，可以先输入为根右左 然后反转一下就是根左右
+            后序遍历是左右根，可以先输入为根右左 然后反转一下就是左右根
             时间复杂度O(n)，空间复杂度O(n)
         """
 
