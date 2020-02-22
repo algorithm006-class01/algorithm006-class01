@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class LeetCode_590_391 {
+public class LeetCode_589_391 {
 
     public static void main(String[] args) {
         Node node1 = new Node(1, new ArrayList<>());
@@ -22,40 +22,40 @@ public class LeetCode_590_391 {
             add(node5);
             add(node6);
         }};
-        List<Integer> postorder = postorderByLoop(node1);
+        List<Integer> postorder = preorderByLoop(node1);
         System.out.println(postorder);
     }
 
     /**
-     * 循环遍历：子节点不为空，倒叙遍历子节点，加入栈；子节点为空，且为取值循环步骤，当前节点的最后一个子节点！=上次遍历最后节点，取值加入结果集，
+     * 循环遍历：先访问根节点，倒叙遍历子节点加入栈
      * @param root
      * @return
      */
-    public static List<Integer> postorderByLoop(Node root) {
-        List<Integer> result = new ArrayList<>();
+    public static List<Integer> preorderByLoop(Node root) {
+        ArrayList<Integer> result = new ArrayList<>();
         if (root == null) {
             return result;
         }
         Stack<Node> stack = new Stack<>();
         Node node = root;
-        Node last = null;
-        stack.push(node);
+        stack.add(node);
         while (!stack.isEmpty()) {
-            node = stack.peek();
-            if (node.children.size() > 0 && node.children.get(node.children.size() - 1) != last) {
-                for (int i = node.children.size() - 1; i >= 0; i--) {
-                    stack.add(node.children.get(i));
-                }
-            } else {
-                result.add(node.val);
-                stack.pop();
-                last = node;
+            node = stack.pop();
+            result.add(node.val);
+            for (int i = node.children.size() - 1; i >= 0; i--) {
+                stack.push(node.children.get(i));
             }
         }
+
         return result;
     }
 
-    public static List<Integer> postorderByRecursion(Node root) {
+    /**
+     * 递归
+     * @param root
+     * @return
+     */
+    public static List<Integer> preorderByRecursion(Node root) {
         ArrayList<Integer> result = new ArrayList<>();
         recursion(root, result);
         return result;
@@ -63,10 +63,10 @@ public class LeetCode_590_391 {
 
     public static void recursion(Node node, ArrayList<Integer> list) {
         if (node != null) {
+            list.add(node.val);
             for (Node child : node.children) {
                 recursion(child, list);
             }
-            list.add(node.val);
         }
     }
 
