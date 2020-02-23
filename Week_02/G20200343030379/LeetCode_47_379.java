@@ -10,6 +10,25 @@ import java.util.Set;
 import java.util.Stack;
 
 //47. 全排列 II
+
+/***
+ * 回溯算法框架：
+ * result = []
+ * def backtrack(路径, 选择列表):
+ *     if 满足结束条件:
+ *         result.add(路径)
+ *         return
+ *
+ *     for 选择 in 选择列表:
+ *         做选择
+ *         backtrack(路径, 选择列表)
+ *         撤销选择
+ *
+ * 作者：labuladong
+ * 链接：https://leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-xiang-jie-by-labuladong-2/
+ * 来源：力扣（LeetCode）
+ * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+ */
 public class LeetCode_47_379 {
     public static void main(String[] args) {
         new LeetCode_47_379().permuteUnique(new int[]{1,2,1});
@@ -41,6 +60,7 @@ public class LeetCode_47_379 {
         //执行逻辑
 
         //循环递归
+        // for 选择 in 选择列表:
         for (int i = 0; i < nums.length; i++) {
             //由于序列是有重复的，不能用该方法排除不合法的选择
             if(visite[i]==1){
@@ -49,7 +69,7 @@ public class LeetCode_47_379 {
             visite[i]=1;
             stack.add(nums[i]);
 
-            //进入下一层
+            //进入下一层决策树
             backtrack(nums,visite,stack);
 
             //撤销选择
