@@ -1,7 +1,6 @@
 package G20200343030391;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -21,6 +20,7 @@ public class LeetCode_144_391 {
         int val;
         TreeNode left;
         TreeNode right;
+
         TreeNode(int x) {
             val = x;
         }
@@ -29,6 +29,7 @@ public class LeetCode_144_391 {
     /**
      * 循环遍历：stack 保存根节点，先访问根节点，然后循环左子树，为空则循环右子树
      * 时间复杂度：O(n)
+     *
      * @param root
      * @return
      */
@@ -48,9 +49,11 @@ public class LeetCode_144_391 {
         }
         return result;
     }
+
     /**
      * 递归遍历：递归查找最左节点，根节点，右节点
      * 时间复杂度：O(n)
+     *
      * @param root
      * @return
      */

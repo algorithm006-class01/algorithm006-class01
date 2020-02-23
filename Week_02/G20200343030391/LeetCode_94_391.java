@@ -20,6 +20,7 @@ public class LeetCode_94_391 {
         int val;
         TreeNode left;
         TreeNode right;
+
         TreeNode(int x) {
             val = x;
         }
@@ -28,6 +29,7 @@ public class LeetCode_94_391 {
     /**
      * 循环遍历：stack 保存根节点，内存循环查找最左节点
      * 时间复杂度：O(n)
+     *
      * @param root
      * @return
      */
@@ -46,9 +48,11 @@ public class LeetCode_94_391 {
         }
         return list;
     }
+
     /**
      * 递归遍历：递归查找最左节点，根节点，右节点
      * 时间复杂度：O(n)
+     *
      * @param root
      * @return
      */
@@ -62,7 +66,7 @@ public class LeetCode_94_391 {
         if (node != null) {
             recursion(node.left, list);
             list.add(node.val);
-            recursion(node.right,list);
+            recursion(node.right, list);
         }
     }
 }

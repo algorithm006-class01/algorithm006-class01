@@ -25,8 +25,9 @@ public class LeetCode_236_391 {
 
     /**
      * 递归： 分别递归左右子树查找p，p;
-     *       若同时存在，则祖先为root；
-     *       若存在p或q中的
+     * 若同时存在，则祖先为root；
+     * 若存在p或q中的
+     *
      * @param root
      * @param p
      * @param q

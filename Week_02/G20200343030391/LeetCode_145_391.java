@@ -26,6 +26,7 @@ public class LeetCode_145_391 {
         int val;
         TreeNode left;
         TreeNode right;
+
         TreeNode(int x) {
             val = x;
         }
@@ -33,8 +34,9 @@ public class LeetCode_145_391 {
 
     /**
      * 循环遍历：stack 保存未访问节点，node保存当前指向的节点（为空代表左子树到头），last代表上次访问的最后节点，栈顶元素右子树不为空
-     *          遍历右子树；上次循环最后访问节点！=栈顶元素右节点代表栈顶
+     * 遍历右子树；上次循环最后访问节点！=栈顶元素右节点代表栈顶
      * 时间复杂度：O(n)
+     *
      * @param root
      * @return
      */
@@ -60,9 +62,11 @@ public class LeetCode_145_391 {
         }
         return list;
     }
+
     /**
      * 递归遍历：递归查找最左节点，右节点,根节点
      * 时间复杂度：O(n)
+     *
      * @param root
      * @return
      */

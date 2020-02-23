@@ -25,9 +25,10 @@ public class LeetCode_235_391 {
 
     /**
      * 递归：
-     *  1.p q 同时小于根节点，则p q 祖先在左子树
-     *  2.p q 同时大于根节点，则p q 祖先在右子树
-     *  3.p q 位于根节点两侧，则root 为根节点
+     * 1.p q 同时小于根节点，则p q 祖先在左子树
+     * 2.p q 同时大于根节点，则p q 祖先在右子树
+     * 3.p q 位于根节点两侧，则root 为根节点
+     *
      * @param root
      * @param p
      * @param q
