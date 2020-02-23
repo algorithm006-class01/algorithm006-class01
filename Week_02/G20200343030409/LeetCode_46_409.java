@@ -1,7 +1,7 @@
 /*
   use backtrack again
 
-  time complexity: O(n!), space complexity: O(n*n!), n is input array length
+  time complexity: O(n*n!), space complexity: O(n*n!), n is input array length
 
 */
 
