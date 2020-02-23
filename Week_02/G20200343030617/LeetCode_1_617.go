@@ -1,29 +1,25 @@
-//236. 二叉树的最近公共祖先
+//49. 字母异位词分组
 
 package main
 
-/**
- * Definition for TreeNode.
- * type TreeNode struct {
- *     Val int
- *     Left *ListNode
- *     Right *ListNode
- * }
- */
+import "sort"
 
-func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
-	if root == p || root == q || root == nil {
-		return root
+type sortRunes []rune
+
+func (s sortRunes) Len() int           { return len(s) }
+func (s sortRunes) Less(i, j int) bool { return s[i] < s[j] }
+func (s sortRunes) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
+
+func groupAnagrams(strs []string) [][]string {
+	var m = make(map[string][]string)
+	for _, str := range strs {
+		s := []rune(str)
+		sort.Sort(sortRunes(s))
+		m[string(s)] = append(m[string(s)], str)
 	}
-	left := lowestCommonAncestor(root.Left, p, q)
-	right := lowestCommonAncestor(root.Right, p, q)
-
-	if left != nil && right != nil {
-		return root
-	} else if left == nil {
-		return right
-	} else {
-		return left
+	var n [][]string
+	for _, k := range m {
+		n = append(n, k)
 	}
-
+	return n
 }

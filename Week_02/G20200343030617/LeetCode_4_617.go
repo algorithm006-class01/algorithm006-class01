@@ -1,4 +1,4 @@
-// 144.二叉树的前序遍历
+// 236. 二叉树的最近公共祖先
 
 package main
 
@@ -8,18 +8,19 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func preorderTraversal(root *TreeNode) []int {
-	var a []int
-	return cds(root, &a)
-}
-
-func cds(root *TreeNode, res *[]int) []int {
-	if root != nil {
-		*res = append(*res, root.Val)
-		cds(root.Left, res)
-		cds(root.Right, res)
-		return *res
-	} else {
-		return nil
+func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+	if root == p || root == q || root == nil {
+		return root
 	}
+	left := lowestCommonAncestor(root.Left, p, q)
+	right := lowestCommonAncestor(root.Right, p, q)
+
+	if left != nil && right != nil {
+		return root
+	} else if left == nil {
+		return right
+	} else {
+		return left
+	}
+
 }
