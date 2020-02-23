@@ -18,7 +18,7 @@ var preorderTraversal = function(root) {
         recursion(root.right);
     }
 };
-*/
+
 // 迭代, 栈
 var preorderTraversal = function(root) {
     if (!root) return [];
@@ -36,4 +36,37 @@ var preorderTraversal = function(root) {
     }
 
     return resultArr;
+}
+*/
+
+// 学习莫里斯遍历
+var preorderTraversal = function(root) {
+    var resultList= [];
+
+    var node = root;
+    while (node != null) {
+        if (node.left == null) {
+            resultList.push(node.val)
+            node = node.right;
+            continue;
+        }
+
+        var predecessor = node.left;
+
+        while (predecessor.right != null && predecessor.right != node) {
+            predecessor = predecessor.right;
+        }
+
+        if (predecessor.right == null) {
+            resultList.push(node.val);
+            predecessor.right = node;
+            node = node.left;
+        } else {
+            predecessor.right = null;
+            node = node.right;
+        }
+
+    }
+
+    return resultList;
 }
