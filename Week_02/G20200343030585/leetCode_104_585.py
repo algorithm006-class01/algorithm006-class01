@@ -16,28 +16,28 @@
 #         self.left = None
 #         self.right = None
 
-# class Solution(object):
-#     def maxDepth(self, root):
-#         """
-#         :type root: TreeNode
-#         :rtype: int
-#         """
-#         if not root:
-#             return 0
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
+            return 0
 
-#         def depth(node, level):
-#             if not node:
-#                 return level
+        def depth(node, level):
+            if not node:
+                return level
 
-#             l_val = r_val = 0
+            l_val = r_val = 0
 
-#             if node.left:
-#                 l_val = depth(node.left, level + 1)
-#             if node.right:
-#                 r_val = depth(node.right, level + 1)
-#             return max(l_val, r_val, level)
+            if node.left:
+                l_val = depth(node.left, level + 1)
+            if node.right:
+                r_val = depth(node.right, level + 1)
+            return max(l_val, r_val, level)
         
-#         return depth(root, 1)
+        return depth(root, 1)
 
             
 # @lc code=end
