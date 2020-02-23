@@ -1,23 +1,28 @@
-class LeetCode_105_505 {
-    private LinkedList<Integer> result = new LinkedList<Integer>();
-    public List<Integer> postorder(Node root) {
-        if(root == null) {
+class LeetCode_429_505 {
+    private List<List<Integer>> result = new ArrayList();
+    public List<List<Integer>> levelOrder(Node root) {
+        if (root == null) {
             return result;
         }
-        
-        Stack<Node> stacks = new Stack<Node>();
-        stacks.add(root);
-        Node curr = null;
-        while (!stacks.isEmpty()) {
-            curr = stacks.pop();
-            result.addFirst(curr.val);
-            if (curr.children != null) {
-                for(Node node:curr.children) {
-                    stacks.add(node);
+
+        Deque<Node> queue = new ArrayDeque<Node>();
+        queue.addLast(root);
+        while (!queue.isEmpty()) {
+            int count = queue.size();
+            List<Integer> level = new ArrayList<Integer>();
+            while (count-- > 0) {
+                Node node = queue.pollFirst();
+                level.add(node.val);
+                if (node.children != null) {
+                    for (Node node1:node.children) {
+                        queue.addLast(node1);
+                    }
                 }
             }
+
+            result.add(level);
         }
 
         return result;
-    } 
+    }
 }

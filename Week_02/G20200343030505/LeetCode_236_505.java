@@ -1,23 +1,18 @@
 class LeetCode_429_505 {
-    private LinkedList<Integer> result = new LinkedList<Integer>();
-    public List<Integer> postorder(Node root) {
-        if(root == null) {
-            return result;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+
+        //递归终止条件
+        if (root == null || root == p || root == q) {
+            return root;
         }
         
-        Stack<Node> stacks = new Stack<Node>();
-        stacks.add(root);
-        Node curr = null;
-        while (!stacks.isEmpty()) {
-            curr = stacks.pop();
-            result.addFirst(curr.val);
-            if (curr.children != null) {
-                for(Node node:curr.children) {
-                    stacks.add(node);
-                }
-            }
+        TreeNode p1 = lowestCommonAncestor(root.left, p, q);
+        TreeNode p2 = lowestCommonAncestor(root.right, p, q);
+
+        if (p1 != null && p2 != null) {
+            return root;
         }
 
-        return result;
-    } 
+        return p1 == null ?p2:p1;
+    }
 }

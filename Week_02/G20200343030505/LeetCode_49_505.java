@@ -1,23 +1,24 @@
 class Solution_49_505 {
-    private LinkedList<Integer> result = new LinkedList<Integer>();
-    public List<Integer> postorder(Node root) {
-        if(root == null) {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> result = new ArrayList();
+        if (strs == null || strs.length == 0)   {
             return result;
         }
-        
-        Stack<Node> stacks = new Stack<Node>();
-        stacks.add(root);
-        Node curr = null;
-        while (!stacks.isEmpty()) {
-            curr = stacks.pop();
-            result.addFirst(curr.val);
-            if (curr.children != null) {
-                for(Node node:curr.children) {
-                    stacks.add(node);
-                }
+
+        Map<String, List<String>> map = new HashMap();
+        for (String str:strs) {
+            char[] arr = str.toCharArray();
+            Arrays.sort(arr);
+            String t = String.valueOf(arr);
+            if (map.containsKey(t)) {
+                map.get(t).add(str);
+            } else {
+                List<String> tList = new ArrayList<String>();
+                tList.add(str);
+                map.put(t, tList);
             }
         }
 
-        return result;
-    } 
+       return new ArrayList(map.values());
+    }
 }
