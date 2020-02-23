@@ -2,9 +2,7 @@ package com.leetcode.practices;
 
 import java.util.Arrays;
 
-public class BuildTree {
-
-
+public class Solution {
 
       public class TreeNode {
           int val;
@@ -47,7 +45,7 @@ public class BuildTree {
     public static void main(String[] args) {
         BuildTree buildTree = new BuildTree();
         int[] preorder =  new int[]{3,9,20,15,7};
-        int[] inorder = new int[] {9,3,15,20,7};
+        int[] inorder = new int[]{9,3,15,20,7};
         buildTree.buildTree(preorder, inorder);
     }
 }

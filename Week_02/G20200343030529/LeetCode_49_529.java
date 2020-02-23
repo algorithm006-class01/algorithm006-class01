@@ -6,7 +6,7 @@ import java.util.*;
  * leetcode.49.字母异位词分组
  * https://leetcode-cn.com/problems/group-anagrams/
  */
-public class GroupAnagrams {
+public class Solution {
 
 //    public List<List<String>> groupAnagrams(String[] strs) {
 //        Map<String, List<String>> map = new HashMap<>();
@@ -58,17 +58,5 @@ public class GroupAnagrams {
 
         return Arrays.toString(count);
     }
-
-    public static void main(String[] args) {
-        String s = "hello";
-        String s1 = "hlleo";
-        GroupAnagrams groupAnagrams = new GroupAnagrams();
-        System.out.println(groupAnagrams.groupAnagrams(new String[]{s, s1}));
-//        System.out.println((byte)'a');
-//        System.out.println((byte)'z' - 97);
-//        String k = groupAnagrams.generateKey(s);
-//        String z = groupAnagrams.generateKey(s1);
-//        System.out.println();
-
-    }
+    
 }

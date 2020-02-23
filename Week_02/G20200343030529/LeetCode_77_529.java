@@ -8,7 +8,7 @@ import java.util.List;
  * leetcode.77.组合
  * https://leetcode-cn.com/problems/combinations/
  */
-public class FindCombinations {
+public class Solution {
 
     private List<List<Integer>> result = new ArrayList<>();
 
@@ -52,21 +52,4 @@ public class FindCombinations {
 
     }
 
-
-
-
-    public static void main(String[] args) {
-        FindCombinations findCombinations = new FindCombinations();
-        findCombinations.combine(3,2);
-//        findCombinations.permute(new int[] {1,2,3});
-        System.out.println(findCombinations.result);
-
-        int mid = 1;
-        int[] aa = new int[]{3,9,20,15,7};
-
-//        System.out.println(Arrays.binarySearch(aa, 2));
-        int[] bb = Arrays.copyOfRange(aa, 1, mid);
-        System.out.println(bb);
-
-    }
 }
