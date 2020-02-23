@@ -16,8 +16,8 @@ public class LeetCode_105_391 {
 
     int[] preorder;
     int[] inorder;
-    int root_preorder;
-    HashMap<Integer, Integer> idx_map = new HashMap<Integer, Integer>();
+    int root_preorder = 0;
+    HashMap<Integer, Integer> inorder_idx_map = new HashMap<Integer, Integer>();
 
     /**
      * @param preorder
@@ -29,35 +29,35 @@ public class LeetCode_105_391 {
         this.preorder = preorder;
 //        中序遍历数组作为左右子树拆分的入口
         for (int i = 0; i < inorder.length; i++) {
-            this.idx_map.put(inorder[i], i);
+            this.inorder_idx_map.put(inorder[i], i);
         }
-        return help(0, inorder.length);
+        return help(0, inorder.length - 1);
     }
 
     /**
      * 递归
      *
-     * @param inorder_left_start
-     * @param left_inorder_length
+     * @param inorder_start
+     * @param inorder_end
      * @return
      */
-    private TreeNode help(int inorder_left_start, int left_inorder_length) {
-        //递归终止条件空数组
-        if (inorder_left_start == left_inorder_length) {
+    private TreeNode help(int inorder_start, int inorder_end) {
+        //递归终止条件
+        if (inorder_start > inorder_end) {
             return null;
         }
         //根节点值
         int root_val = preorder[root_preorder];
         TreeNode root_node = new TreeNode(root_val);
         //以根节点下标分割中序遍历数组左右子树
-        int root_idx_inorder = idx_map.get(root_val);
+        int root_idx_inorder = inorder_idx_map.get(root_val);
         //开始递归
         //前序遍历下一个根节点下标
         root_preorder++;
         //构建左子树
-        root_node.left = help(inorder_left_start, root_idx_inorder);
+        root_node.left = help(inorder_start, root_idx_inorder - 1);
         //构建右子树
-        root_node.right = help(root_idx_inorder + 1, left_inorder_length);
+        root_node.right = help(root_idx_inorder + 1, inorder_end);
         return root_node;
     }
 
