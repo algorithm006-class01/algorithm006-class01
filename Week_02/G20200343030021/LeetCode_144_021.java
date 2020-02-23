@@ -43,6 +43,7 @@ class Solution {
 //        清理当前层
     }
 
+
     //栈模拟递归 ，迭代
     public List<Integer> preorderTraversal(TreeNode root) {
 //        用链表实现栈
