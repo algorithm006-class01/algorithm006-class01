@@ -19,5 +19,6 @@ public class LeetCode_105_587 {
         node.left = buildTreeHelp(preorder, left, idx - 1);
         node.right = buildTreeHelp(preorder, idx + 1, right);
         return node;
+
     }
 }
