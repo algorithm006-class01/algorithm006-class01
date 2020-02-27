@@ -20,11 +20,16 @@
 我把这个题目解释为两个方面，
 #### 1、向老板汇报工作
 #### 2、向公众汇报工作
+
   在工作中我们普遍遇到的问题是向老板汇报的情况，比如要把一周的工作做总结，然后写成PPT或文档上交。
-> 知道后面发生了什么吗，在周例会后你的老板会把你整理的工作放到他的周报里面然后上交上去。如果你没有正确的说清楚，老板也没有看到并修改就不好了（自己就遇到过一次）。
+  
+>知道后面发生了什么吗，在周例会后你的老板会把你整理的工作放到他的周报里面然后上交上去。如果你没有正确的说清楚，老板也没有看到并修改就不好了（自己就遇到过一次)。
 
 向公众汇报工作，有两种情况，一种是公司内部的分享和晋升答辩，一种是对外的宣传发言。我在这里把给公众的演讲也放到这类，其实他们的道理是一样的。都是通过总结整理输出符合用户需求的内容。
-这里给大家举个反面的事例，通过事例大家就能理解向公众汇报的影响力。记得原先公司有位设计总监，级别在管理层级里面已经算高了，有次受外部邀请去参加一个会议并做一个主题演讲，结果ppt很随意，演讲给演砸了，我理解他本来没太当回事，不成想这个事件直接让他丢了饭碗，公司内部论坛就有人爆料了，然后给推到内网首页大字标题，导致无数人跟帖要他下课，公司顺应民意就把他给干掉了。
+
+这里给大家举个反面的事例，通过事例大家就能理解向公众汇报的影响力。
+
+>记得原先公司有位设计总监，级别在管理层级里面已经算高了，有次受外部邀请去参加一个会议并做一个主题演讲，结果ppt很随意，演讲给演砸了，我理解他本来没太当回事，不成想这个事件直接让他丢了饭碗，公司内部论坛就有人爆料了，然后给推到内网首页大字标题，导致无数人跟帖要他下课，公司顺应民意就把他给干掉了。
 这个例子也说明了《向上汇报》做好很有必要，做不好对个人很有影响，所以需要引起注意。当然我们现在可能都还没有到一定职位，没有出去汇报或演讲的要求，但是我们可以早为自己打好基础。
 
 ## 向上沟通的原则是什么?
@@ -123,47 +128,63 @@
  
 ### PPT的图表要求 
 - 柱状图
+
   两两相比用柱状图
+
 - 饼图
+
   从大到小排序，自己公司排最前面
+
   一定标百分比
+
   饼图不要用3D
+
   不要超过6块
+
 - 趋势图
+
   趋势表现用趋势图
+
 - 做数据图表
+
   图表不超过2两个颜色
+
   不能有图例
+
   不能有横的数据线
+
   不能用3D
+
   不用直接用Excel图表
+
   图的左上角标识含义和单位
+
   ppt的图不要用excel画，直接用ppt画图
+
  
 ![图片1](https://uploader.shimo.im/f/qgcp66Ue3Nogb33o.png)
-
-图片: https://uploader.shimo.im/f/DMCr4XHrALwUdK4o.png
-图片: https://uploader.shimo.im/f/lcCCVgtrWBULaYPX.png
-图片: https://uploader.shimo.im/f/nKx6uR8yR1k9Uxyi.png
-图片: https://uploader.shimo.im/f/xSDngTtR9EQlf0s0.png
-
-图片: https://uploader.shimo.im/f/iveAkWHv3BkvPYd8.png
-
-图片: https://uploader.shimo.im/f/2xqGztA8uK0a8b7y.png
+![图片2](https://uploader.shimo.im/f/DMCr4XHrALwUdK4o.png)
+![图片3](https://uploader.shimo.im/f/lcCCVgtrWBULaYPX.png)
+![图片4](https://uploader.shimo.im/f/nKx6uR8yR1k9Uxyi.png)
+![图片5](https://uploader.shimo.im/f/xSDngTtR9EQlf0s0.png)
+![图片6](https://uploader.shimo.im/f/iveAkWHv3BkvPYd8.png)
+![图片7](https://uploader.shimo.im/f/2xqGztA8uK0a8b7y.png)
 
 
-题目的泛化
-怎么与人沟通
-敢于拒绝不合理需求
-如何做演讲
-分享的意义
+## 题目的泛化
+- 怎么与人沟通
+- 敢于拒绝不合理需求
+- 如何做演讲
+- 分享的意义
 
- 最后祝愿每位听众都能在职场上获得成功，谢谢！
+## 最后祝愿每位听众都能在职场上获得成功，谢谢！
 
-参考和推荐
-《原则 principles》 http://product.dangdang.com/25204629.html
-Qi 迹  https://mp.weixin.qq.com/s/CvkESxu7aY6ZOnz89auGxw
- 公众号：辉哥奇谭
-《刻意练习》 https://www.amazon.cn/dp/B01MDQ7RAX
-向上汇报原文：https://www.cnblogs.com/huansky/p/7997724.html
-QA
+## 参考和推荐
+-《原则 principles》 http://product.dangdang.com/25204629.html
+- Qi 迹  https://mp.weixin.qq.com/s/CvkESxu7aY6ZOnz89auGxw
+- 公众号：辉哥奇谭
+-《刻意练习》 https://www.amazon.cn/dp/B01MDQ7RAX
+- 向上汇报原文：https://www.cnblogs.com/huansky/p/7997724.html
+
+
+## QA
