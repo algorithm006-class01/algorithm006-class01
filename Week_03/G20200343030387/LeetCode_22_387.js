@@ -2,7 +2,7 @@
  * @param {number} n
  * @return {string[]}
  */
-// 想象有2n个格式，每个格子放一个格，可以放左或右括号，并且满足成对的形式
+// 想象有2n个格式，每个格子放一个左或右括号，并且满足成对的形式
 // 最近重复性是放左格号或右括号
 var generateParenthesis = function (n) {
     const res = []
