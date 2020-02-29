@@ -3,6 +3,7 @@ class Solution {
         System.out.println(lemonadeChange(new int[]{5, 5, 10, 10, 5, 20, 5, 20}));
     }
 
+
     /**
      * 如果是20元，先找10+5体现了贪心算法
      *
