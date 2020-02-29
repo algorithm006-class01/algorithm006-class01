@@ -10,15 +10,63 @@ public class LeetCode_51_391 {
 
     public static void main(String[] args) {
         int digits = 4;
-        List<List<String>> lists = new LeetCode_51_391().solveNQueens_backtrack(digits);
+        List<List<String>> lists = new LeetCode_51_391().solveNQueens(digits);
         System.out.println(lists);
     }
+
+    /**
+     * 实时计算位置
+     * @param n
+     * @return
+     */
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> result = new ArrayList<>();
+        if (n == 0) {
+            return result;
+        }
+        char[][] board = new char[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                board[i][j] = '.';
+            }
+        }
+        int[] cols = new int[n];
+        int[] fls = new int[2 * n - 1];
+        int[] rls = new int[2 * n - 1];
+        solve(0, n, board, cols, fls, rls, result);
+        return result;
+    }
+
+    private void solve(int i, int n, char[][] board, int[] cols, int[] fls, int[] rls, List<List<String>> ans) {
+        if (i == n) {
+            List<String> strs = new ArrayList<>();
+            for (int k = 0; k < n; k++) {
+                strs.add(String.valueOf(board[k]));
+            }
+            ans.add(strs);
+            return;
+        }
+        for (int j = 0; j < n; j++) {
+            if (cols[j] == 0 && fls[i + j] == 0 && rls[n - 1 - i + j] == 0) {
+                board[i][j] = 'Q';
+                cols[j] = 1;
+                fls[i + j] = 1;
+                rls[n - 1 - i + j] = 1;
+                solve(i + 1, n, board, cols, fls, rls, ans);
+                board[i][j] = '.';
+                cols[j] = 0;
+                fls[i + j] = 0;
+                rls[n - 1 - i + j] = 0;
+            }
+        }
+    }
+
 
     /**
      * @param n
      * @return
      */
-    public List<List<String>> solveNQueens_backtrack(int n) {
+    public List<List<String>> solveNQueensByBacktrack(int n) {
         List<List<String>> result = new ArrayList<>();
         if (n == 0) {
             return result;
