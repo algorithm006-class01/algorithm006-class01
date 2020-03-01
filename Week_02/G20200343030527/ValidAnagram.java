@@ -1,5 +1,3 @@
-import java.lang.String;
-
 class ValidAnagram {
     public boolean isAnagram(String s, String t) {
         if (s == null || t == null || s.length() != t.length()) {
