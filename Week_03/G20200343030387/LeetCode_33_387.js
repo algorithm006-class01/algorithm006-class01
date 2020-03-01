@@ -9,7 +9,8 @@
 //   如果 nums[left] < mid，表示这部分递增，target < nums[left] 或 target > mid，命中后半部分；
 //   如果 nums[left] > mid，表示这部分不是递增，target < nums[left] 且 target > mid，命中后半部分；
 // 否则，命中前半部分；
-// 排除到只剩下一个元素时，判断其值是否与target相等，是则返回其索引，否则返回-1
+// 每次需要判断mid是否等于target，是则返回其索引，否则返回-1
+// 遍历结束也没找到符合条件的，返回-1
 var search = function (nums, target) {
     if (!nums.length) return -1
     let left = 0
