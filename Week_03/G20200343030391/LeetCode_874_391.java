@@ -1,6 +1,6 @@
 package G20200343030391;
 
-public class LeetCode_874_391 {
+public class  LeetCode_874_391 {
 
     public static void main(String[] args) {
 
