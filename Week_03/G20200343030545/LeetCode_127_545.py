@@ -34,41 +34,36 @@ from typing import List
 
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        res = 0
-        if beginWord and endWord and endWord in wordList:
-            res = self.BFS(beginWord, endWord, wordList)
-
-        return res
+        return self.BFS(beginWord, endWord, wordList)
 
     @classmethod
-    def BFS(cls, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        begin_word_len = len(beginWord)
-        word_blur_dict = defaultdict(list)
-
-        # 1. 预先生成
-        for word in wordList:
+    def BFS(cls, begin_word: str, end_word: str, word_list: List[str]) -> int:
+        """
+            时间复杂度：O(m*n)  m是单词的长度 n是单词表中的个数
+            空间复杂度：O(m*n)  blur_word_dict所占
+        """
+        # 1. 转换格式
+        blur_word_dict = defaultdict(list)
+        begin_word_len = len(begin_word)
+        for word in word_list:
             for index in range(begin_word_len):
-                word_blur_dict[word[:index] + "*" + word[index + 1:]].append(word)
+                blur_word_dict[word[:index] + "*" + word[index + 1:]].append(word)
 
         # 2. BFS
-        queue = [(beginWord, 1)]
-        visited = {beginWord: True}
+        queue = [(begin_word, 1)]
+        visited = {begin_word: True}
 
         while queue:
             current_word, current_level = queue.pop(0)
 
             for index in range(begin_word_len):
-                blur_word = current_word[:index] + "*" + current_word[index + 1:]
-
-                for word in word_blur_dict[blur_word]:
-                    if word == endWord:
+                for word in blur_word_dict[current_word[:index] + "*" + current_word[index + 1:]]:
+                    if word == end_word:
                         return current_level + 1
-
                     if word not in visited:
                         visited[word] = True
                         queue.append((word, current_level + 1))
-                word_blur_dict[blur_word] = []
-        return 0
+        return -1
 
 
 if __name__ == '__main__':

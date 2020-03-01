@@ -63,26 +63,44 @@ class Solution:
 
     @classmethod
     def use_divide(cls, nums: List[int]) -> int:
+        """
+            时间复杂度：O(nlogn)
+            空间负责度：O(logn)
+        """
 
-        def recursive(lo, hi):
-            if lo == hi:
-                return nums[lo]
+        def recursive(left_index: int, right_index: int) -> int:
+            if left_index == right_index:
+                return nums[left_index]
 
-            mid = (lo + hi) // 2
+            mid_index = (left_index + right_index) // 2
+            left_val = recursive(left_index, mid_index)
+            right_val = recursive(mid_index + 1, right_index)
 
-            left = recursive(lo, mid)
-            right = recursive(mid + 1, hi)
+            if left_val == right_val:
+                return left_val
 
-            if left == right:
-                return left
+            left_count = sum(1 for i in range(left_index, right_index + 1) if nums[i] == left_val)
+            right_count = sum(1 for i in range(left_index, right_index + 1) if nums[i] == right_val)
 
-            left_count = sum(1 for i in range(lo, hi + 1) if nums[i] == left)
-            right_count = sum(1 for i in range(lo, hi + 1) if nums[i] == right)
-
-            return left if left_count > right_count else right
+            return left_val if left_count > right_count else right_val
 
         return recursive(0, len(nums) - 1)
 
+    @classmethod
+    def use_boyer_moore(cls, nums: List[int]) -> int:
+        """
+            时间复杂度：O(n)
+            空间复杂度：O(1)
+
+        """
+        res = count = 0
+        for num in nums:
+            if count == 0:
+                res = num
+            count += (1 if res == num else -1)
+
+        return res
+
 
 if __name__ == '__main__':
-    Solution.use_divide([[2, 2, 1, 1, 1, 2, 2]])
+    print(Solution.use_divide([3, 2, 3]))

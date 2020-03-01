@@ -22,14 +22,21 @@ class Solution:
         return res
 
     @classmethod
-    def recursive(cls, left: int, right: int, n: int, s: str, res: List[str]):
+    def recursive(cls, left: int, right: int, n: int, s: str, res: List[str]) -> None:
         # terminator
-        if left == n and right == n:
+        if left == right == n:
             res.append(s)
             return
 
         # code logic
         if left < n:
+            # drill down
             cls.recursive(left + 1, right, n, s + "(", res)
-        if left > right:
+
+        if right < left:
+            # drill down
             cls.recursive(left, right + 1, n, s + ")", res)
+
+
+if __name__ == "__main__":
+    print(Solution().generateParenthesis(3))

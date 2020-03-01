@@ -17,12 +17,23 @@ from typing import List
 
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        steps = end = max_pos = 0
+        """
+            时间复杂度：O(n)
+            空间复杂度：O(1)
+            每次找到能跳到最远的位置
+            如果循环下标到达这个位置，则更新步数和边界值
 
-        for index in range(len(nums)):
-            max_pos = max(max_pos, nums[index + 1])
+        """
+        steps = end = max_area = 0
 
-            if index == end:
-                end = max_pos
+        for index, num in enumerate(nums[:-1]):  # 因为这个里index是从0开始的，上来肯定先加1，如果num不是到最后一个停止，就会导致结果多加1
+            max_area = max(max_area, nums[index] + index)
+
+            if end == index:
                 steps += 1
+                end = max_area
         return steps
+
+
+if __name__ == '__main__':
+    print(Solution().jump([2, 3, 1, 1, 4]))

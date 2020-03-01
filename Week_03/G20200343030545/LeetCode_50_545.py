@@ -25,18 +25,14 @@ class Solution:
         if n < 0:
             x = 1 / x
             n = -n
-        return self.divide(x, n)
+        return self.recursive(x, n)
 
     @classmethod
-    def divide(cls, x: float, n: int) -> float:
-        # 1. terminator
-        # 2.process (split your big problem)
-        # 3.drill down  merge(sub_result)
-        # 4.reverse states
+    def recursive(cls, x: float, n: int) -> float:
         if n == 0:
             return 1.0
 
-        half = cls.divide(x, n // 2)
+        half = cls.recursive(x, n // 2)
 
         return half * half if n % 2 == 0 else half * half * x
 

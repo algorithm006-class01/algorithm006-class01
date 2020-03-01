@@ -33,9 +33,7 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        res = 0
-
-        return res
+        return self.greedy(prices)
 
     @classmethod
     def greedy(cls, prices: List[int]) -> int:
@@ -60,15 +58,27 @@ class Solution:
             return 0
 
         max_profit = 0
-
         for i in range(index, len(prices)):
-            tmp_max_profit = 0
             for j in range(i + 1, len(prices)):
                 if prices[j] > prices[i]:
                     profit = cls.recursive(prices, j + 1) + prices[j] - prices[i]
-                    tmp_max_profit = max(tmp_max_profit, profit)
-            max_profit = max(max_profit, tmp_max_profit)
+                    max_profit = max(profit, profit)
+
         return max_profit
+
+        # if index >= len(prices):
+        #     return 0
+        #
+        # max_profit = 0
+        #
+        # for i in range(index, len(prices)):
+        #     tmp_max_profit = 0
+        #     for j in range(i + 1, len(prices)):
+        #         if prices[j] > prices[i]:
+        #             profit = cls.recursive(prices, j + 1) + prices[j] - prices[i]
+        #             tmp_max_profit = max(tmp_max_profit, profit)
+        #     max_profit = max(max_profit, tmp_max_profit)
+        # return max_profit
 
 
 if __name__ == '__main__':

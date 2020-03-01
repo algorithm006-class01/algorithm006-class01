@@ -51,18 +51,19 @@ class Solution:
 
             时间复杂度 O(n)
         """
-        five = ten = 0
+        ten = five = 0
 
         for bill in bills:
             if bill == 5:
                 five += 1
             elif bill == 10:
-                if not five:
+                if five:
+                    five -= 1
+                    ten += 1
+                else:
                     return False
-                five -= 1
-                ten += 1
             elif bill == 20:
-                if five and ten:
+                if ten and five:
                     five -= 1
                     ten -= 1
                 elif five >= 3:
@@ -70,3 +71,7 @@ class Solution:
                 else:
                     return False
         return True
+
+
+if __name__ == '__main__':
+    print(Solution().lemonadeChange([5, 5, 5, 10, 20]))

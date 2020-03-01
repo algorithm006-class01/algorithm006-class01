@@ -46,33 +46,29 @@ class Solution:
     }
 
     def minMutation(self, start: str, end: str, bank: List[str]) -> int:
-        res = -1
+        counts = []
         if start and end and bank:
-            ret = []
-            self.recursive(start, end, 0, bank, ret)
-            res = min(ret) if ret else res
-        return res
+            self.recursive(start, end, bank, 0, counts)
+        return min(counts) if counts else -1
 
     @classmethod
-    def recursive(cls, start: str, end: str, count: int, bank: List[str], counts: List[int]):
+    def recursive(cls, start: str, end: str, bank: List[str], count: int, counts: List[int]) -> None:
         # terminator
         if start == end:
             counts.append(count)
         if not bank:
             return
 
-        # process
-        for index, s in enumerate(start):
-            for change_info in cls.change_detail[s]:
+        # code logic
+        for index, s_row in enumerate(start):
+            for change_info in cls.change_detail[s_row]:
+                new_s_row = start[:index] + change_info + start[index + 1:]
 
-                # code logic
-                new_s = start[:index] + change_info + start[index + 1:]
-
-                if new_s in bank:
-                    bank.remove(new_s)
+                if new_s_row in bank:
+                    bank.remove(new_s_row)
 
                     # drill down
-                    cls.recursive(new_s, end, count + 1, bank, counts)
+                    cls.recursive(new_s_row, end, bank, count + 1, counts)
 
                     # reverse state
-                    bank.append(new_s)
+                    bank.append(new_s_row)

@@ -24,45 +24,39 @@ class Solution:
         return res
 
     @classmethod
-    def DFS_BY_RECURSIVE(cls, node: TreeNode, level: int, res: List[List[int]]):
+    def DFS(cls, node: TreeNode, level: int, res: List[List[int]]):
         """
             深度优先 一条线走到低，然后从底开始回溯  递归的解法
         """
+        # terminator
         if level == len(res):
             res.append([])
         res[level].append(node.val)
 
         if node.left:
-            cls.DFS_BY_RECURSIVE(node.left, level + 1, res)
-
+            cls.DFS(node.left, level + 1, res)
         if node.right:
-            cls.DFS_BY_RECURSIVE(node.right, level + 1, res)
+            cls.DFS(node.right, level + 1, res)
 
     @classmethod
-    def DFS_BY_STACK(cls, node: TreeNode) -> List[List[int]]:
-        """
-            深度优先 自己维护一个栈来操作
-        """
-        pass
-
-    @classmethod
-    def BFS(cls, root: TreeNode):
+    def BFS(cls, root: TreeNode) -> List[List[int]]:
         """
             广度优先  一层一层访问
-
         """
         res = []
-        if root:
-            queue = [root]
 
+        if res:
+            queue = [root]
             while queue:
-                next_nodes = []  # 存放下一层的所有节点
-                res.append([])
+                new_queue = []
+                tmp_res = []
                 for node in queue:
                     if node.left:
-                        next_nodes.append(node.left)
+                        new_queue.append(node.left)
                     if node.right:
-                        next_nodes.append(node.right)
-                    res[-1].append(node.val)
-                queue = next_nodes
+                        new_queue.append(node.right)
+                    tmp_res.append(node.val)
+
+                new_queue.append(tmp_res)
+                queue = new_queue
         return res

@@ -26,19 +26,26 @@ from typing import List
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         res = []
-        self.DFS([], [], [], n, res)
-        return [["." * col + "Q" + "." * (n - col - 1) for col in row] for row in res]
+        self.recursive([], [], [], n, res)
+        return [["." * col + "Q" + (n - col - 1) * "." for col in row] for row in res]
 
     @classmethod
-    def DFS(cls, queens: List[int], xy_diff: List[int], xy_sum: List[int], n: int, res: List[List[int]]):
-        row = len(queens)
+    def recursive(cls, queues: List[int], xy_diff: List[int], xy_sum: List[int], n: int, res: List[List[int]]):
+        # terminator
+        row = len(queues)
         if row == n:
-            res.append(queens)
+            res.append(queues[:])
             return
 
         for col in range(n):
-            if col not in queens and row - col not in xy_diff and row + col not in xy_sum:
-                cls.DFS(queens + [col], xy_diff + [row - col], xy_sum + [row + col], n, res)
+            if col not in queues and row - col not in xy_diff and row + col not in xy_sum:
+                queues.append(col)
+                xy_diff.append(row - col)
+                xy_sum.append(row + col)
+                cls.recursive(queues, xy_diff, xy_sum, n, res)
+                queues.pop()
+                xy_diff.pop()
+                xy_sum.pop()
 
 
 if __name__ == "__main__":

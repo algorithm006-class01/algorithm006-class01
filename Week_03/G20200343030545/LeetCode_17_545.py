@@ -23,23 +23,24 @@ class Solution:
     }
 
     def letterCombinations(self, digits: str) -> List[str]:
+        """
+            时间复杂度：O(3**n * 4 ** m)
+            空间复杂度：O(3**n * 4 ** m)
+        """
 
         res = []
         if digits:
-            self.recursive("", digits, 0, res)
+            self.recursive(0, "", res, digits)
         return res
 
     @classmethod
-    def recursive(cls, res_str: str, digits: str, index: int, res: List[str]):
-        # terminator
+    def recursive(cls, index: int, s: str, res: List[str], digits: str):
         if index == len(digits):
-            res.append(res_str)
+            res.append(s)
             return
 
-        # process
-        letters = cls.mobile[digits[index]]
-        for i in range(len(letters)):
-            cls.recursive(res_str + letters[i], digits, index + 1, res)
+        for letter in cls.mobile[digits[index]]:
+            cls.recursive(index + 1, s + letter, res, digits)
 
 
 if __name__ == "__main__":

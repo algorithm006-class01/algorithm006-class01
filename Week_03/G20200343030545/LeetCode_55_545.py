@@ -19,12 +19,21 @@ from typing import List
 
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        k = 0  # 表示能跳到的最远地方
+        """
+            每次都往最远的地方跳转
+            时间复杂度：O(n)，空间复杂度：O(1)
+        """
+        max_index = 0
+        for index, num in enumerate(nums):
 
-        for index in range(len(nums)):
-            if index > k:
-                # 表示这个地方你跳不到
+            if index > max_index:
                 return False
             else:
-                k = max(k, index + nums[index])
+                max_index = max(max_index, index + nums[index])
         return True
+
+
+if __name__ == '__main__':
+    nums = [3, 2, 1, 0, 4]
+
+    print(Solution().canJump(nums))

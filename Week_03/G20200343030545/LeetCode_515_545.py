@@ -30,32 +30,36 @@ class Solution:
             res = []
             self.DFS(root, 0, res)
             return [max(i) for i in res]
+            # res = []
+            # self.DFS(root, 0, res)
 
     @classmethod
-    def DFS(cls, root: TreeNode, level: int, res: List[List[int]]):
-        if level == len(res):
+    def DFS(cls, root: TreeNode, index: int, res: List[List[int]]):
+        if index == len(res):
             res.append([])
-        res[level].append(root.val)
+        res[index].append(root.val)
 
         if root.left:
-            cls.DFS(root.left, level + 1, res)
+            cls.DFS(root.left, index + 1, res)
+
         if root.right:
-            cls.DFS(root.right, level + 1, res)
+            cls.DFS(root.right, index + 1, res)
 
-    def BFS(self, root: TreeNode) -> List[int]:
+    @classmethod
+    def BFS(cls, root: TreeNode) -> List[int]:
+
         res = []
-
         queue = [root]
-
         while queue:
-            nodes = []
+            new_queue = []
             max_res = float("-inf")
             for node in queue:
                 if node.left:
-                    nodes.append(node.left)
+                    new_queue.append(node.left)
                 if node.right:
-                    nodes.append(node.right)
+                    new_queue.append(node.right)
                 max_res = max(max_res, node.val)
             res.append(max_res)
-            queue = nodes
+
+            queue = new_queue
         return res
