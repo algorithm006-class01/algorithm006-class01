@@ -1,0 +1,129 @@
+* convert ArrayList<Integer> to int[] in one line                      :Java:
+#+begin_src java
+arraylist.stream().mapToInt(i -> i).toArray();
+#+end_src
+[[https://stackoverflow.com/questions/718554/how-to-convert-an-arraylist-containing-integers-to-primitive-int-array][source]]
+* push a element to an array like array.push()                         :Java:
+#+begin_src java
+array = push(array, item);
+private String[] push(String[] array, String push) {
+    String[] longer = new String[array.length + 1];
+    for (int i = 0; i < array.length; i++)
+        longer[i] = array[i];
+    longer[array.length] = push;
+    return longer;
+}
+#+end_src
+[[https://stackoverflow.com/questions/4537980/equivalent-to-push-or-pop-for-arrays][source]]
+a better solution use intStream of Java8
+#+begin_src java
+private static int[] push(int[] array, int value) {
+    return IntStream.concat(Arrays.stream(array), IntStream.of(value)).toArray();
+}
+#+end_src
+[[https://codereview.stackexchange.com/questions/149801/push-an-item-onto-the-end-of-array-in-java][source]]
+uglier...
+* debug Java in Visual Studio Code                                     :Java:
+https://code.visualstudio.com/docs/java/java-debugging
+
+* TODO Iterator vs. ListIterator                                       :Java:
+https://www.baeldung.com/java-iterate-list
+
+* TODO Collections.copy(dest, src) vs. new ArrayList<Integer>[src]     :Java:
+https://stackoverflow.com/questions/10427109/how-to-copy-values-not-references-of-listinteger-into-another-list
+comments are very important
+
+* TODO String concatenate                                              :Java:
+https://javarevisited.blogspot.com/2015/01/3-examples-to-concatenate-string-in-java.html
+
+* BFS template                                                         :Java:
+#+begin_src java
+  private viod bfs (TreeNode root){
+    Set<TreeNode> visited = new HashSet<>();
+    Queue<TreeNode> queue = new LinkedList<>();
+    queue.offer(root);
+  }
+  while (!queue.isEmpty()) {
+    int node = queue.poll();
+    visited.add(node);
+
+    process(node);
+
+    nodes = node.children();
+    for (TreeNode n : nodes) {
+      if (!visited.contains(n))
+        queue.offer(nodes);
+    }
+
+  }
+  // other process work
+  ...
+#+end_src
+
+* DFS recursion template                                               :Java:
+#+begin_src java
+  Set<TreeNode> visited = new HashSet<>();
+  private void dfs(TreeNode node) {
+    if (visited.contains(node))
+      return
+    visited.add(node);
+    // process
+    ...
+    for(TreeNode n : node.children()) {
+      if (!visited.contains(n))
+        dfs(n);
+    }
+  }
+
+#+end_src
+* DFS stack template                                                   :Java:
+#+begin_src java
+  private void dfs (TreeNode root) {
+    Set<TreeNode> visited = new HashSet<>();
+    List<TreeNode> stack = new LinkedList<>();
+    while (stack.size() != 0)) {
+      node = stack.pop();
+      visited.add(node);
+
+      // process
+      ...
+      nodes = node.childrens();
+      for (TreeNode n : nodes) {
+        if (!visited.contains(node))
+          stack.push(nodes);
+      }
+    }
+  }
+#+end_src
+* BSA template
+#+begin_src java
+  int left = 0;
+  int right = arr.length - 1;
+  while (left <= right) {
+    mid = left + right / 2;
+    if (arr[mid] = target) {
+      break;
+    else if (array[mid] < target)
+      left = mid + 1;
+    else
+      right = mid - 1;
+  }
+#+end_src
+* BSA
+想明白只有两个元素时怎么处理，以及偶数元素时mid在前在后是否+1，就基本不会错
+* 贪心
+先情景模拟，再找重复性
+* java.util.ConcurrentModificationException                            :Java:
+#+begin_src java
+  for (String w: wordSet) {
+    if (shit_happens) wordSet.remove(w);
+  }
+#+end_src
+this will throw java.util.ConcurrentModificationException
+should be done like this
+#+begin_src java
+for (Iterator<String> it = wordSet.iterator(); it.hasNext();) {
+    StringInteger element = it.next();
+    if (shit_happens) it.remove();
+}
+#+end_src
