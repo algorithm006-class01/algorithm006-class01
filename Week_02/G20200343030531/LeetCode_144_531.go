@@ -1,8 +1,12 @@
 package main
 
+<<<<<<< HEAD
 import (
 	"fmt"
 )
+=======
+import "fmt"
+>>>>>>> origin/master
 
 type TreeNode struct {
 	Val   int
@@ -16,8 +20,11 @@ func main() {
 	fmt.Println(preorderTraversal(root))
 }
 
+<<<<<<< HEAD
 // 解法一
 /*
+=======
+>>>>>>> origin/master
 func preorderTraversal(root *TreeNode) []int {
 	var res []int
 	helper(root, &res)
@@ -32,6 +39,7 @@ func helper(root *TreeNode, res *[]int) {
 	helper(root.Left, res)
 	helper(root.Right, res)
 }
+<<<<<<< HEAD
 */
 /*
 func preorderTraversal(root *TreeNode) (rst []int) {
@@ -104,3 +112,5 @@ func preOrder(root *TreeNode, res *[]int) {
 	preOrder(root.Left, res)
 	preOrder(root.Right, res)
 }
+=======
+>>>>>>> origin/master
