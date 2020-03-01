@@ -69,31 +69,49 @@ class Solution:
 class SolutionExt:
     """
          寻找一个旋转序数组中的 中间无效的地方, 假设坏点只出现了一次
-         比如 [1,2,3,4,5,1,2,5,6,9]
-         思路：
-            先找出坏点，也就是从哪个位置开始不是单调递增的
-
+         比如  [4,5,6,7,0,1,2]
     """
 
-    def find_bat_pointer(self, nums: List[int]):
-        start = 0
-        end = len(nums) - 1
-        while end >= start:
-            mid = (start + end) // 2
-            mid_val = nums[mid]
-            end_val = nums[end]
+def find_bat_pointer(self, nums: List[int]):
+    left = 0
+    right = len(nums) - 1
 
-            if mid_val > end_val:
-                # 说明前半部分是有序的
-                start = mid + 1
+    if nums[left] < nums[right]:
+        return 0
+
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] > nums[mid + 1]:
+            return mid + 1
+        else:
+            if nums[mid] < nums[left]:
+                right = mid - 1
             else:
-                if mid_val > nums[mid + 1]:
-                    start = mid + 1
-                else:
-                    end = mid - 1
-        print(f"start:{start} end:{end}")
+                left = mid + 1
+    return 0
 
 
 if __name__ == '__main__':
-    [1, 2, 3, 7, 1, 2, 4]  # start :4 end:3
-    SolutionExt().find_bat_pointer([7, 8, 9, 10, 14, 13, 49])
+    from typing import List
+
+
+    def find_bat_pointer(nums: List[int]):
+        if not nums:
+            raise ValueError("Nums Empty")
+
+        left = 0
+        right = len(nums) - 1
+
+        if nums[left] < nums[right]:
+            # 说明这个数组是单调递增的
+            return 0
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] > nums[mid + 1]:
+                return mid + 1
+            else:
+                if nums[mid] < nums[left]:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+        return 0
