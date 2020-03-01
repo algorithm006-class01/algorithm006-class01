@@ -1,6 +1,6 @@
 package G20200343030375;
 
-public class Leetcode_33_375 {
+public class LeetCode_33_375 {
     public int search(int[] nums, int target) {
         int left = 0;
         int right = nums.length-1;
