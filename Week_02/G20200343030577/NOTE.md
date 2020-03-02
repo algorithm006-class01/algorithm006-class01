@@ -131,18 +131,15 @@ func fibUseRecur(n int) int {
 }
 
 // 尾递归版本
-func fibUseTailRecur(target, current, fv, sv int) int {
+func fibUseTailRecur(target,fv, sv int) int {
 	if target <= 1 {
 		return fv
 	}
 	if target == 2 {
 		return sv
 	}
-	if current >= target {
-		return fv + sv
-	}
-	return fibUseTailRecur(target, current+1, sv, fv+sv)
+	return fibUseTailRecur(target-1, sv, fv+sv)
 }
-// fibUseRecur(6) == fibUseTailRecur(6,3,1,2)
+// fibUseRecur(6) == fibUseTailRecur(6,1,2)
 ``` 
 
