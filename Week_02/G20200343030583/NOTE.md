@@ -37,7 +37,7 @@ Map and set -> python: dict & set
 Def recursion(level, param1, param2,…)
 #recursion terminator 终止条件先写上
 If level > MAX_LEVEL:
-	process_result
+    process_result
 	return
 
 # process logic in current level 处理当前层的数据
