@@ -1,24 +1,23 @@
 class Solution {
-    Set<String> codeSet = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
-            "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"));
-    private int res = 0;
+    public int minPathSum(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
 
-    public int numDecodings(String s) {
-        int len = s.length();
-        int[] dp = new int[3];
-        dp[0] = 1;
-        dp[1] = codeSet.contains(s.substring(0, 1)) ? 1 : 0;
+        int[][] dp = new int[m][n];
 
-        for (int i = 2; i <= len; i++) {
-            int currSolutionCount = 0;
-            if (codeSet.contains(s.substring(i - 1, i))) {
-                currSolutionCount += dp[(i - 1) % 3];
-            }
-            if (codeSet.contains(s.substring(i - 2, i))) {
-                currSolutionCount += dp[(i - 2) % 3];
-            }
-            dp[i % 3] = currSolutionCount;
+        dp[m - 1][n - 1] = grid[m - 1][n - 1];
+        for (int i = m - 2; i >= 0; i--) {
+            dp[i][n - 1] = grid[i][n - 1] + dp[i + 1][n - 1];
         }
-        return dp[len % 3];
+        for (int i = n - 2; i >= 0; i--) {
+            dp[m - 1][i] = grid[m - 1][i] + dp[m - 1][i + 1];
+        }
+
+        for (int i = m - 2; i >= 0; i--) {
+            for (int j = n - 2; j >= 0; j--) {
+                dp[i][j] = Math.min(dp[i + 1][j], dp[i][j + 1]) + grid[i][j];
+            }
+        }
+        return dp[0][0];
     }
 }
