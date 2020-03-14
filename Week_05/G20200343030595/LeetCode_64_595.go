@@ -1,3 +1,5 @@
+package main
+
 func minPathSum(grid [][]int) int {
 	if len(grid) < 1 || len(grid[0]) < 1 {
 		return 0
