@@ -2,8 +2,21 @@
  * @param {number[][]} grid
  * @return {number}
  */
-// 二维DP方程： dp[i,j] = g[i,j] + min(dp[i+1, j], dp[i, j+1])
+// 递归
+// 超时
 var minPathSum1 = function (grid) {
+    const m = grid.length
+    const n = grid[0].length
+    function reversion(i, j, grid) {
+        if (i === m || j === n) return Infinity
+        if (i === m - 1 && j === n - 1) return grid[i][j]
+        return grid[i][j] + Math.min(reversion(i + 1, j, grid), reversion(i, j + 1, grid))
+    }
+    return reversion(0, 0, grid)
+}
+
+// 二维DP方程： dp[i,j] = g[i,j] + min(dp[i+1, j], dp[i, j+1])
+var minPathSum2 = function (grid) {
     const m = grid.length - 1
     const n = grid[0].length - 1
     const dp = grid
