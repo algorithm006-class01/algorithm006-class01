@@ -2,11 +2,18 @@
 # @lc app=leetcode.cn id=169 lang=python
 #
 # [169] 多数元素
-#
+#给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+# 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+
+# 示例 1:
+
+# 输入: [3,2,3]
+# 输出: 3
+
 #
 # 解题思路
 # 1.暴力法
-#   时间复杂度O(n)
+#   时间复杂度O(n^2)
 # 2.哈希表
 #   依次循环计算所有元素的出现次数，如果次数大于 n/2就是
 #   时间复杂度O(n)
@@ -66,7 +73,7 @@ class Solution(object):
                return nums[start]
                 
             #  current level logic
-            idx = (end - start) // 2  + start     
+            idx = (start + end) // 2
             #  drill down
             left = recur(start, idx)
             right = recur(idx + 1, end)
@@ -74,7 +81,7 @@ class Solution(object):
             if left == right:
                 return left
             
-            # 计算左右两边谁的多数元素多,这里有个问题要注意，就是比较两边的值，range是不包含end的结果循环的
+            # 计算左右两边的出现最多的数在一边出现了多少次,这里有个问题要注意，就是比较两边的值，range是不包含end的结果循环的
             # 所以只用end会导致少一个循环比较
             left_compare = sum(1 for i in range(start, idx + 1) if nums[i] == left)
             right_compare = sum(1 for j in range(idx + 1, end + 1) if nums[j] == right)
