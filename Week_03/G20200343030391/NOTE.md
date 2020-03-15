@@ -24,11 +24,26 @@
             //restore current status
           }
        ``` 
-# 回溯ddd   
+# 回溯
    - 模板
-        ```java
-            int a=0;
-        ```
+      ```java
+          public void recur(int lever,int param) {
+            // terminator
+            if(leverl > max_level){
+                // process result
+                return;
+            }
+            //process current logic
+            process(level,param);
+            
+            //drill down
+            recur(level:level+1,newParam);
+            // backtrack
+             level--;       
+     
+            //restore current status
+          }
+      ``` 
 # 深度优先
    - 模板
      - 递归写法
@@ -99,12 +114,5 @@
               }elset{
                   ritht = mid - 1;
               }   
-        }   
-      
-      
-      
-      
-      
-      
-      
+        }    
        ```
