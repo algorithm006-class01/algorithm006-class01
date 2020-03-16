@@ -16,3 +16,5 @@ class Solution:
         return len(dp.get(stones[-1])) > 0
 
 
+
+
