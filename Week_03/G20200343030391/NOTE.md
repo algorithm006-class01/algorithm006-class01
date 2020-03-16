@@ -24,11 +24,26 @@
             //restore current status
           }
        ``` 
-# 回溯ddd   
+# 回溯
    - 模板
-        ```java
-            int a=0;
-        ```
+      ```java
+          public void recur(int lever,int param) {
+            // terminator
+            if(leverl > max_level){
+                // process result
+                return;
+            }
+            //process current logic
+            process(level,param);
+            
+            //drill down
+            recur(level:level+1,newParam);
+            // backtrack
+             level--;       
+     
+            //restore current status
+          }
+      ``` 
 # 深度优先
    - 模板
      - 递归写法
@@ -82,4 +97,22 @@
             # other processing work 
             ...   
          }
+       ```
+# 二分查找
+   -  模板
+       ```java
+        public int bs(int [] array,int target){
+          int left=0;
+          int right=array.length-1;
+          while left <= right:
+              int mid = (left + ritht) / 2;
+              if (array[mind]==target){
+                  //find the target
+                  return mid;
+              } else if(array[mid] < target){
+                  left = mid+1;
+              }elset{
+                  ritht = mid - 1;
+              }   
+        }    
        ```
