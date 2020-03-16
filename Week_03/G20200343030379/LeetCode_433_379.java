@@ -1,5 +1,7 @@
 package G20200343030379;
 
+import javafx.concurrent.Worker;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -55,12 +57,16 @@ import java.util.Stack;
  */
 public class LeetCode_433_379 {
     public static void main(String[] args) {
-        new LeetCode_433_379().minMutation2("AACCGGTT","AAACGGTA",new String[]{"AACCGGTA","AACCGCTA","AAACGGTA"});
+        int i = new LeetCode_433_379().minMutation_2("AACCGGTT", "AAACGGTA", new String[]{"AACCGGTA", "AACCGCTA", "AAACGGTA"});
+        System.out.println(i);
+
 
     }
 
     /**
      * 队列遍历法-->广度优先搜索 BFS
+     * 执行用时 : 1 ms , 在所有 Java 提交中击败了 75.78% 的用户
+     * 内存消耗 : 36.9 MB , 在所有 Java 提交中击败了 5.13% 的用户
      */
     public int minMutation(String start, String end, String[] bank) {
         if(start.equals(end)) return 1;
@@ -122,7 +128,65 @@ public class LeetCode_433_379 {
     }
 
     /**
-     * 递归法-->深度优先搜索 DFS
+     * 队列遍历法-->广度优先搜索 BFS，对比minMutation()上面的写法进行优化
+     *
+     * 执行用时 : 0 ms , 在所有 Java 提交中击败了 100.00% 的用户
+     * 内存消耗 : 37.6 MB , 在所有 Java 提交中击败了 5.13% 的用户
+     */
+    public int minMutation_2(String start, String end, String[] bank) {
+        if(start.equals(end)) return 1;
+
+        //初始化集合、变量
+        Queue<String> queue=new LinkedList<>();
+        Set visited=new HashSet();
+
+
+        //初始化数据
+        int lever=0;
+        queue.add(start);
+        visited.add(start);
+
+        //迭代处理
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            //迭代每一层，每层 level+1
+            while (size-- >0){
+                String poll = queue.poll();
+                if(poll.equals(end)){
+                    return lever;
+                }
+
+                //处理每个字符
+                char[] chars = poll.toCharArray();
+                for (String b : bank) {
+                    if(visited.contains(b)){
+                        continue;
+                    }
+                    int diff=0;
+                    for (int i = 0; i < chars.length; i++) {
+                        if(chars[i]!=b.charAt(i)){
+                            if(++diff>1){
+                                break;
+                            }
+                        }
+                    }
+
+                    //检查是否属于基因库
+                    if(diff==1){
+                        queue.add(b);
+                        visited.add(b);
+                    }
+
+                }
+            }
+            lever++;
+        }
+        return -1;
+
+    }
+
+    /**
+     * 递归法-->深度优先搜索 DFS，（不建议使用深度优先，如果bank很多，那超时是必然的）
      * 参考题解：https://leetcode-cn.com/problems/minimum-genetic-mutation/solution/java-dfs-hui-su-by-1yx/
      */
     int minStepCount=Integer.MAX_VALUE;
@@ -166,7 +230,7 @@ public class LeetCode_433_379 {
                 visited.add(str);
                 //递归
                 dfs(visited,stepCount+1,str,end,bank);
-                visited.remove(str);
+                //visited.remove(str);
             }
 
         }
