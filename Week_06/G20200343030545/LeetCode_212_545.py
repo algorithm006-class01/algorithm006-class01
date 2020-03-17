@@ -32,48 +32,47 @@ class Solution:
     DIRECTION_SET = ((1, 0), (-1, 0), (0, -1), (0, 1))  # 代表上下左右
 
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        # 1. 构建一棵trie树，并且初始化一个列表用来存储结果
-        trie = self.build_trie(words)
+        # 0. 初始化变量
         res = []
+        m = len(board)
+        n = len(board[0]) if board else 0
 
-        # 2. 对board进行深度优先遍历
-        row_len = len(board)
-        col_len = len(board[0]) if board else 0  # 做一下容错
-        for row_index in range(row_len):
-            for col_index in range(col_len):
-                self.dfs(board, trie, row_index, col_index, "", res)
-        # 3. 输出结果
-        return res
+        # 1. 构建一个trie
+        trie = self.build_trie(words)
+
+        # 2. dfs
+        for i in range(m):
+            for j in range(n):
+                self.dfs(board, trie, i, j, "", res)
+
+        # 3.返回结果
+        return list(set(res))
 
     @classmethod
     def dfs(cls, board: List[List[str]], trie: Dict[str, Dict], row_index: int, col_index: int, tmp_str: str,
-            res: List[str]) -> None:
-        """
-            深度优先遍历
-        """
-        char = board[row_index][col_index]
-
+            res: List[str]):
         # terminator
+        char = board[row_index][col_index]
         if char not in trie:
             return
-        tmp_str += char
+        m = len(board)
+        n = len(board[0])
+
         trie = trie[char]
+        tmp_str += char
         if cls.TRIE_END_CHAR in trie:
             res.append(tmp_str)
 
-        board[row_index][col_index] = cls.TRIE_END_CHAR  # 防止重复计算
-
-        row_len = len(board)
-        col_len = len(board[0])
-
-        for tmp_row_index, tmp_col_index in cls.DIRECTION_SET:
-            new_row_index = row_index + tmp_row_index
-            new_col_index = col_index + tmp_col_index
-
-            # drill down
-            if 0 <= new_row_index < row_len and 0 <= new_col_index < col_len and board[new_row_index][
-                new_col_index] != cls.TRIE_END_CHAR:
+        board[row_index][col_index] = cls.TRIE_END_CHAR
+        # process
+        for tmp_row_index, tmp_col_index in ((1, 0), (-1, 0), (0, -1), (0, 1)):
+            new_row_index = tmp_row_index + row_index
+            new_col_index = tmp_col_index + col_index
+            if 0 <= new_row_index < m and 0 <= new_col_index < n and board[new_row_index][
+                new_col_index] != cls.TRIE_END_CHAR and board[new_row_index][new_col_index] in trie:
+                # drill down
                 cls.dfs(board, trie, new_row_index, new_col_index, tmp_str, res)
+
         # reverse state
         board[row_index][col_index] = char
 
@@ -82,10 +81,10 @@ class Solution:
         res = {}
         for word in words:
             trie = res
-
             for char in word:
                 trie = trie.setdefault(char, {})
             trie[cls.TRIE_END_CHAR] = cls.TRIE_END_CHAR
+
         return res
 
 
