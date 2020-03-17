@@ -81,10 +81,11 @@ class Solution:
     def build_trie(cls, words: List[str]) -> Dict[str, Dict]:
         res = {}
         for word in words:
-            tmp_res = res
+            trie = res
+
             for char in word:
-                tmp_res = tmp_res.setdefault(char, {})
-            tmp_res[cls.TRIE_END_CHAR] = cls.TRIE_END_CHAR
+                trie = trie.setdefault(char, {})
+            trie[cls.TRIE_END_CHAR] = cls.TRIE_END_CHAR
         return res
 
 
