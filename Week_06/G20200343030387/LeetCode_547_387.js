@@ -20,8 +20,10 @@ class UnionFind {
         // 初始化并查集
         this.count = n
         this.parent = []
+        this.size = []
         for (let i = 0; i < n; i++) {
             this.parent[i] = i
+            this.size[i] = 1
         }
     }
 
@@ -47,7 +49,14 @@ class UnionFind {
         const pi = this.find(i)
         const pj = this.find(j)
         if (pi === pj) return
-        this.parent[pi] = pj
+        // 小树合并到大树上，尽量让合并后树的高度较小
+        if (this.size[pi] > this.size[pj]) {
+            this.parent[pi] = pj
+            this.size[pi] += this.size[pj]
+        } else {
+            this.parent[pj] = pi
+            this.size[pj] += this.size[pi]
+        }
         this.count--
     }
 }
