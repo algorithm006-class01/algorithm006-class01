@@ -63,12 +63,11 @@ class Solution:
                     for tmp_word in word_dict.get(blur_word, []):
                         if tmp_word in end_queue:
                             return res
-                        if tmp_word not in visited:
+                        if tmp_word not in visited and tmp_word not in word_list:
                             visited[tmp_word] = 1
                             if tmp_word in word_list:
                                 tmp_queue.append(tmp_word)
             start_queue = tmp_queue
-            print(visited)
 
             if len(start_queue) > len(end_queue):
                 start_queue, end_queue = end_queue, start_queue
