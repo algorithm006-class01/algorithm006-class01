@@ -23,6 +23,7 @@ public class LeetCode_212_391 {
 
     /**
      * Trie
+     * 时间复杂度 O(N * M * 4^k)
      *
      * @param board
      * @param words
