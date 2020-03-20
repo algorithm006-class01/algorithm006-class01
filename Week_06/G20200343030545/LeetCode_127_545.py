@@ -28,79 +28,80 @@
 
         解释: endWord "cog" 不在字典中，所以无法进行转换。
 """
-from collections import deque
 from typing import List
 
 
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        return self.bfs(beginWord, endWord, wordList)
+        return self.two_end_bfs(beginWord, endWord, wordList)
 
     @classmethod
-    def tow_end_bfs(cls, begin_word, end_word, word_list: List[str]) -> int:
-        if not (begin_word and end_word and end_word in word_list):
-            return 0
-
-        word_dict = dict()
-        begin_word_len = len(begin_word)
-
-        for word in word_list:
-            for i in range(begin_word_len):
-                key = word[:i] + "*" + word[i + 1:]
-                word_dict[key] = word_dict.get(key, []) + [word]
-
-        start_queue = [begin_word]
-        end_queue = [end_word]
-        visited = {}
-
-        res = 1
-        while start_queue:
-            res += 1
-            tmp_queue = []
-            for word in start_queue:
-                for i in range(begin_word_len):
-                    blur_word = word[:i] + "*" + word[i + 1:]
-                    for tmp_word in word_dict.get(blur_word, []):
-                        if tmp_word in end_queue:
-                            return res
-                        if tmp_word not in visited and tmp_word not in word_list:
-                            visited[tmp_word] = 1
-                            if tmp_word in word_list:
-                                tmp_queue.append(tmp_word)
-            start_queue = tmp_queue
-
-            if len(start_queue) > len(end_queue):
-                start_queue, end_queue = end_queue, start_queue
-
-        return 0
-
-    @classmethod
-    def bfs(cls, begin_word: str, end_word: str, word_list: List[str]) -> int:
-        res = 0
+    def two_end_bfs(cls, begin_word, end_word, word_list: List[str]) -> int:
         if begin_word and end_word and end_word in word_list:
-            begin_word_len = len(begin_word)
             word_dict = dict()
+            begin_word_len = len(begin_word)
 
             for word in word_list:
                 for i in range(begin_word_len):
                     key = word[:i] + "*" + word[i + 1:]
                     word_dict[key] = word_dict.get(key, []) + [word]
 
-            queue = deque([(begin_word, 1)])
-            visited = {begin_word: True}
+            begin_word_queue = [begin_word]
+            end_word_queue = [end_word]
+            visited = set()
 
-            while queue:
-                cur_word, cur_res = queue.popleft()
+            res = 1
+            while begin_word_queue:
+                tmp_queue = []
+                res += 1
+                for tmp_word in begin_word_queue:
+                    for i in range(begin_word_len):
+                        like_word = tmp_word[:i] + "*" + tmp_word[i + 1:]
+                        for check_word in word_dict.get(like_word, []):
+                            if check_word in end_word_queue:
+                                return res
+                            if check_word not in visited:
+                                visited.add(check_word)
+                                tmp_queue.append(check_word)
+                begin_word_queue = tmp_queue
 
+                if len(begin_word_queue) > len(end_word_queue):
+                    begin_word_queue, end_word_queue = end_word_queue, begin_word_queue
+        return 0
+
+    @classmethod
+    def bfs(cls, begin_word: str, end_word: str, word_list: List[str]) -> int:
+        if end_word and end_word in word_list:
+            word_dict = dict()
+            begin_word_len = len(begin_word)
+            for word in word_list:
                 for i in range(begin_word_len):
-                    blur_word = cur_word[:i] + "*" + cur_word[i + 1:]
+                    key = word[:i] + "*" + word[i + 1:]
+                    word_dict[key] = word_dict.get(key, []) + [word]
 
-                    for word in word_dict.get(blur_word, []):
+            # bfs
+            queue = [begin_word]
+            visit = {}
 
-                        if word == end_word:
-                            return cur_res + 1
+            res = 1  # z这里求的是最短路径 包括开始给的begin_word，所以初始res=1
+            while queue:
+                res += 1
+                tmp_queue = []
+                for tmp_word in queue:
+                    for i in range(begin_word_len):
+                        like_word = tmp_word[:i] + "*" + tmp_word[i + 1:]
+                        for check_word in word_dict.get(like_word, []):
+                            if check_word == end_word:
+                                return res
+                            if check_word not in visit:
+                                visit[check_word] = True
+                                tmp_queue.append(check_word)
+                queue = tmp_queue
+        return 0
 
-                        if word not in visited:
-                            queue.append((word, cur_res + 1))
-                            visited[word] = True
-        return res
+
+if __name__ == '__main__':
+    b = "hit"
+    e = "cog"
+    w = ["hot", "dot", "dog", "lot", "log", "cog"]
+    print(Solution.bfs(b, e, w))

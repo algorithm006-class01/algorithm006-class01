@@ -46,61 +46,65 @@ class Solution:
 
     @classmethod
     def two_end_bfs(cls, start: str, end: str, bank: List[str]) -> int:
-        if end not in bank:
-            return -1
+        if end and end in bank:
+            start_len = len(start)
+            start_queue = [start]
+            end_queue = [end]
+            visit = {}
 
-        start_queue = [start]
-        end_queue = [end]
-        start_len = len(start)
+            res = 0
+            while start_queue:
+                res += 1
+                tmp_queue = []
+                for tmp_info in start_queue:
+                    for i in range(start_len):
+                        for char in cls.MAPPING[tmp_info[i]]:
+                            check_info = tmp_info[:i] + char + tmp_info[i + 1:]
 
-        visited = {}
-        res = 0
-        while start_queue:
-            tmp_queue = []
-            res += 1
-            for tmp_start in start_queue:
-                for i in range(start_len):
-                    blur_start = cls.MAPPING.get(tmp_start[i])
-                    for blur_char in blur_start:
-                        cur_start = tmp_start[:i] + blur_char + tmp_start[i + 1:]
-                        if cur_start not in bank:
-                            continue
+                            if check_info not in bank:
+                                continue
 
-                        if cur_start in end_queue:
-                            return res
+                            if check_info in end_queue:
+                                return res
 
-                        if cur_start not in visited:
-                            visited[cur_start] = 1
-                            tmp_queue.append(cur_start)
-            start_queue = tmp_queue
-            if len(start_queue) > len(end_queue):
-                start_queue, end_queue = end_queue, start_queue
+                            if check_info not in visit:
+                                visit[check_info] = True
+                                tmp_queue.append(check_info)
+                start_queue = tmp_queue
+                if len(start_queue)> len(end_queue):
+                    start_queue, end_queue = end_queue, start_queue
         return -1
 
     @classmethod
     def bfs(cls, start: str, end: str, bank: List[str]) -> int:
-        if end not in bank:
-            return -1
+        if end and end in bank:
+            queue = [start]
+            start_len = len(start)
+            visit = {}
 
-        start_len = len(start)
+            res = 0
+            while queue:
+                tmp_queue = []
+                res += 1
+                for cur_start in queue:
+                    for i in range(start_len):
+                        for tmp_char in cls.MAPPING[cur_start[i]]:
+                            check_start = cur_start[:i] + tmp_char + cur_start[i + 1:]
+                            if check_start not in bank:
+                                continue
 
-        queue = [(start, 1)]
-        visited = {}
-        while queue:
-            cur_start, cur_res = queue.pop(0)
+                            if check_start == end:
+                                return res
 
-            for index in range(start_len):
-                blur_char = cur_start[index]
-                for char in cls.MAPPING[blur_char]:
-                    tmp_start = cur_start[:index] + char + cur_start[index + 1:]
-
-                    if tmp_start not in bank:
-                        continue
-
-                    if tmp_start == end:
-                        return cur_res
-
-                    if tmp_start not in visited:
-                        visited[tmp_start] = 1
-                        queue.append((tmp_start, cur_res + 1))
+                            if check_start not in visit:
+                                visit[check_start] = 1
+                                tmp_queue.append(check_start)
+                queue = tmp_queue
         return -1
+
+
+if __name__ == '__main__':
+    start = "AACCTTGG"
+    end = "AATTCCGG"
+    bank = ["AATTCCGG", "AACCTGGG", "AACCCCGG", "AACCTACC"]
+    print(Solution.bfs(start, end, bank))
