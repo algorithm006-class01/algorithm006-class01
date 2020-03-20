@@ -9,7 +9,7 @@ class Solution {
     vector<string> ans;
 public:
     vector<string> generateParenthesis(int n) {
-        int s = "";
+        string s = "";
         DFS(s, 0, 0, n);
         return ans;
         

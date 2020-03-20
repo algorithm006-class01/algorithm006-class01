@@ -58,7 +58,8 @@ public:
                     //边界
                     if ( i == 0 || i == rows - 1 || j == 0 || j == cols - 1){
                         dsu.unionSet( node(i,j,cols), dummy );
-                    } else{ 
+                    } else{
+                        //无需边界检查
                         for (int k = 0; k < 4; k++){
                             int nx = i + dx[k];
                             int ny = j + dy[k];
