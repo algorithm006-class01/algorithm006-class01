@@ -264,6 +264,7 @@ public class LeetCode_127_391 {
 
     /**
      * 判断是否符合规则，只改变一个字母
+     *
      * @param s1
      * @param s2
      * @return
