@@ -50,3 +50,27 @@ def parent(self, p, i):
 		x = i; i = p[i]; p[x] = root 
 	return root
 ```
+
+## 双向BFS代码模板
+```
+def BFS(graph, start, end):
+    visited = set()
+	front = set()
+    back = set()
+	front.add([start]) 
+    back.add([end])
+
+	while front: 
+		visited.add(node)
+
+        for node in front:
+		    process(node)
+
+		nodes = generate_related_nodes(node) 
+		front = set(nodes)
+        if len(front) > len(back):
+            swap(front, back)
+
+	# other processing work 
+	...
+```
