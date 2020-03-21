@@ -41,6 +41,7 @@ public class ImplementTriePrefixTree {
             p.isEndingChar = true;
         }
 
+
         /**
          * Returns if the word is in the trie.
          * 在Trie树中查找一个字符串
