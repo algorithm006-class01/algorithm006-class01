@@ -1,11 +1,5 @@
 package com.study.week06;
 
-import com.study.Node;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
 /**
  * @author Abner
  * @date 2020/3/22 21:45
