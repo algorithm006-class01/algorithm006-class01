@@ -23,51 +23,36 @@ class Trie:
         """
         Initialize your data structure here.
         """
-        self.root_node = {}
-        self.end_of_word = "#"
+        self.root = {}
+        self._end_flag = "#"
 
     def insert(self, word: str) -> None:
         """
         Inserts a word into the trie.
         """
-        node = self.root_node
+        node = self.root
         for char in word:
-            # 这里表示 如果node里面有char 就返回char的数据，没有就生成一个空字典更新到node里，并且返回这个空字典。相当于下面的三行
             node = node.setdefault(char, {})
-            # if char not in node:
-            #     node[char] = {}
-            # node = node[char]
-        node[self.end_of_word] = "#"
-        print(self.root_node)
+        node[self._end_flag] = self._end_flag
 
     def search(self, word: str) -> bool:
         """
         Returns if the word is in the trie.
         """
-        node = self.root_node
-
+        node = self.root
         for char in word:
             if char not in node:
                 return False
             node = node[char]
-        # 这一行的目的主要是判断单词是否走完，比如apple 现在存入到字典树，如果不加这个app也会返回True
-        return self.end_of_word in node
+        return self._end_flag in node
 
     def startsWith(self, prefix: str) -> bool:
         """
         Returns if there is any word in the trie that starts with the given prefix.
         """
-        node = self.root_node
+        node = self.root
         for char in prefix:
             if char not in node:
                 return False
-
             node = node[char]
         return True
-
-
-if __name__ == "__main__":
-    trie = Trie()
-    trie.insert("apple")
-    print(trie.search("apple"))
-    print(trie.search("app"))

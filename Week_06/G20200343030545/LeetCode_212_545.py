@@ -32,60 +32,48 @@ class Solution:
     DIRECTION_SET = ((1, 0), (-1, 0), (0, -1), (0, 1))  # 代表上下左右
 
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        # 0. 初始化变量
-        res = []
-        m = len(board)
-        n = len(board[0]) if board else 0
-
-        # 1. 构建一个trie
         trie = self.build_trie(words)
 
-        # 2. dfs
-        for i in range(m):
-            for j in range(n):
-                self.dfs(board, trie, i, j, "", res)
-
-        # 3.返回结果
-        return list(set(res))
+        res = []
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                self.dfs(board, trie, i, j, '', res)
+        return res
 
     @classmethod
-    def dfs(cls, board: List[List[str]], trie: Dict[str, Dict], row_index: int, col_index: int, tmp_str: str,
-            res: List[str]):
-        # terminator
-        char = board[row_index][col_index]
+    def dfs(cls, board: List[List[str]], trie: Dict, i: int, j: int, s: str, res: List[str]):
+        char = board[i][j]
+        m = len(board)
+        n = len(board[0]) if m else 0
         if char not in trie:
             return
-        m = len(board)
-        n = len(board[0])
 
         trie = trie[char]
-        tmp_str += char
+        s += char
         if cls.TRIE_END_CHAR in trie:
-            res.append(tmp_str)
+            res.append(s)
+            return
 
-        board[row_index][col_index] = cls.TRIE_END_CHAR
-        # process
-        for tmp_row_index, tmp_col_index in ((1, 0), (-1, 0), (0, -1), (0, 1)):
-            new_row_index = tmp_row_index + row_index
-            new_col_index = tmp_col_index + col_index
-            if 0 <= new_row_index < m and 0 <= new_col_index < n and board[new_row_index][
-                new_col_index] != cls.TRIE_END_CHAR and board[new_row_index][new_col_index] in trie:
-                # drill down
-                cls.dfs(board, trie, new_row_index, new_col_index, tmp_str, res)
+        board[i][j] = cls.TRIE_END_CHAR
 
-        # reverse state
-        board[row_index][col_index] = char
+        for tmp_i, tmp_j in cls.DIRECTION_SET:
+            new_i = tmp_i + i
+            new_j = tmp_j + j
+
+            if 0 <= new_i < m and 0 <= new_j < n and board[new_i][new_j] != cls.TRIE_END_CHAR:
+                cls.dfs(board, trie, new_i, new_j, s, res)
+
+        board[i][j] = char
 
     @classmethod
-    def build_trie(cls, words: List[str]) -> Dict[str, Dict]:
-        res = {}
+    def build_trie(cls, words: List[str]):
+        root = {}
         for word in words:
-            trie = res
+            node = root
             for char in word:
-                trie = trie.setdefault(char, {})
-            trie[cls.TRIE_END_CHAR] = cls.TRIE_END_CHAR
-
-        return res
+                node = node.setdefault(char, {})
+            node[cls.TRIE_END_CHAR] = cls.TRIE_END_CHAR
+        return root
 
 
 if __name__ == '__main__':

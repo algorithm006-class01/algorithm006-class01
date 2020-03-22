@@ -32,44 +32,61 @@ from typing import List
 
 
 class Solution:
+    DIRECTION = ((1, 0), (-1, 0), (0, 1), (0, -1))
+
     def findCircleNum(self, M: List[List[int]]) -> int:
         return self.dis_join_set(M)
 
     @classmethod
     def dis_join_set(cls, M: List[List[int]]) -> int:
-        def find(root: List[int], i: int) -> int:
-            index = i
-            while root[index] != index:
-                index = root[index]
-            # 路径压缩
-            while root[i] != i:
+        def union(p, i1, i2):
+            r1 = find(p, i1)
+            r2 = find(p, i2)
+            p[r1] = r2
+
+        def find(p, i):
+            root = i
+
+            while p[root] != root:
+                root = p[root]
+
+            while p[i] != i:
                 x = i
-                i = root[i]
-                root[x] = index
-            return index
+                i = p[i]
+                p[x] = root
+            return root
 
-        def union(root, index1, index2):
-            node1 = find(root, index1)
-            node2 = find(root, index2)
-
-            if node1 != node2:
-                root[node2] = node1
-
-        if not M:
-            return 0
-
-        m = len(M)
-        r = [i for i in range(m)]
-
-        for row in range(m):
-            for col in range(m):
-                if M[row][col] == 1:
-                    union(r, row, col)
-        return len(set([find(r, i) for i in range(m)]))
+        p_list = [i for i in range(len(M))]
+        for i in range(len(M)):
+            for j in range(len(M[0])):
+                if M[i][j] == 1:
+                    union(p_list, i, j)
+        return len(set([find(p_list, i) for i in range(len(M))]))
 
     @classmethod
     def dfs(cls, M: List[List[int]]) -> int:
-        pass
+        """
+            时间复杂度：O(n**2)
+            空间复杂度：O(n)
+        """
+        if not M:
+            return 0
+        m = len(M)
+        visited = [False] * m
+
+        def dfs(u):
+            for j in range(m):
+                if M[u][j] == 1 and visited[j] is False:
+                    visited[j] = True
+                    dfs(j)
+
+        count = 0
+        for i in range(m):
+            if visited[i] is False:
+                count += 1
+                visited[i] = True
+                dfs(i)
+        return count
 
     @classmethod
     def bfs(cls, M: List[List[int]]) -> int:
@@ -77,4 +94,11 @@ class Solution:
 
 
 if __name__ == '__main__':
-    print(Solution.dis_join_set([[1, 1, 0], [1, 1, 0], [0, 0, 1]]))
+    print(Solution().findCircleNum(
+        [
+            [1, 0, 0, 1],
+            [0, 1, 1, 0],
+            [0, 1, 1, 1],
+            [1, 0, 1, 1]
+        ]
+    ))
