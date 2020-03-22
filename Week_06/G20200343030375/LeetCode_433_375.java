@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * 模仿别人的题解
+ * 广度优先
  */
 public class LeetCode_433_375 {
     public int minMutation(String start, String end, String[] bank) {
