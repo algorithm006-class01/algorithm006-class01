@@ -1,4 +1,4 @@
-package com.study.week03;
+package com.study.week06;
 
 import com.study.Node;
 
