@@ -9,62 +9,67 @@ import java.util.*;
 // @date Mar 22 2020
 // @solution a*
 class Solution {
+    int n;
     public int shortestPathBinaryMatrix(int[][] grid) {
-        if (grid == null || grid.length == 0) return -1;
-        int rl = grid.length, cl = grid[0].length;
-        if (grid[0][0] == 1 || grid[rl - 1][cl - 1] == 1) return -1;
+        n = grid.length;
+        if (grid[0][0] == 1 || grid[n - 1][n - 1] == 1) return -1;
+        if (n == 1) return 1;
         int[][] dir = {
             {-1, 0}, {1, 0}, {0, -1}, {0, 1},
             {-1, 1}, {-1, -1}, {1, -1}, {1, 1}
         };
-        int[] step = new int[rl * cl];
-        for (int i = 0; i < rl * cl; i ++) 
-            step[i] = Integer.MAX_VALUE;
-        Comparator<Integer> manhattan = (pos1, pos2) -> {
-            int r1 = pos1 / cl, c1 = pos1 % cl;
-            int r2 = pos2 / cl, c2 = pos2 % cl;
-            int mht1 = Math.max(Math.abs(rl - 1 - r1) , Math.abs(cl - 1 - c1));
-            int mht2 = Math.max(Math.abs(rl - 1 - r2) , Math.abs(cl - 1 - c2));
-            // if (Math.abs((mht1 + step[pos1]) - (mht2 + step[pos2])) <= (int)Math.sqrt((double)rl)) 
-            //     return 0;
-            // return (mht1 + step[pos1]) - (mht2 + step[pos2]);
-            // return mht1 - mht2;
-            return step[pos1] - step[pos2];
-        };
-        // Comparator<Integer> euclidean = (pos1, pos2) -> {
-        //     int r1 = rl - 1 - pos1 / cl, c1 = cl - 1 - pos1 % cl;
-        //     int r2 = rl - 1 - pos2 / cl, c2 = cl - 1 - pos2 % cl;
-        //     double distance1 = Math.sqrt((r1)*(r1) +(c1)*(c1));
-        //     double distance2 = Math.sqrt((r2)*(r2) +(c2)*(c2));
-        //     //return Double.compare((distance1 + (double)step[pos1]), (distance2 + (double)step[pos2]));
-        //     return Double.compare((distance1), (distance2));
-        // };
-        PriorityQueue<Integer> queue = new PriorityQueue<>(manhattan);
-        queue.offer(0);
-        step[0] = 1;
-        grid[0][0] = 1;
+        Node start = new Node(0, 0, grid[0][0] = 1);
+        Queue<Node> queue = new PriorityQueue<>();
+        queue.offer(start);
         while (!queue.isEmpty()) {
-            int pos = queue.poll();
-            // System.out.println(pos);
-            // System.out.println(step[pos]);
-            // System.out.println("===========");
-            if (pos == rl * cl - 1) return step[pos];
-            int _r = pos / cl, _c = pos % rl;
+            Node node = queue.poll();
+            int step = grid[node.x][node.y];
             for (int[] d : dir) {
-                int r = _r + d[0];
-                int c = _c + d[1];
-                if (r < 0 || c < 0 || r >= rl || c >= cl) continue;
-                if (grid[r][c] == 0) {
-                    step[r * cl + c] = Math.min(step[pos] + 1, step[r * cl + c]);
-                    // step[r * cl + c] = step[pos] + 1;
-                    queue.offer(r * cl + c);
-                    grid[r][c] = 1;
-                }
+                int x = node.x + d[0];
+                int y = node.y + d[1];
+                if (x == n - 1 && y == n - 1) return step + 1;
+                if (x < 0 || x >= n || y < 0 || y >= n) continue;
+                if (grid[x][y] != 0 && grid[x][y] <= step + 1) continue;
+                Node next = new Node(x, y, grid[x][y] = step + 1);
+                queue.offer(next);
             }
         }
         return -1;
     }
+
+    class Node implements Comparable<Node> {
+        int x;
+        int y;
+        int step;
+        int distance;
+        int heuristic;
+
+        public Node(int x, int y, int step) {
+            this.x = x;
+            this.y = y;
+            this.step = step;
+            this.distance = Math.max(n - 1 - x, n - 1 - y);
+            this.heuristic = this.distance + this.step;
+        }
+
+        @Override
+        public int compareTo(Node o) {
+            return this.heuristic - o.heuristic;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Node)) return false;
+            Node node = (Node) o;
+            return x == node.x && y == node.y;
+        }
+
+        @Override
+        public int hashCode() {
+            return Integer.hashCode(x * n + y);
+        }
+    }
 }
-// 
 // @lc code=end
 
