@@ -46,38 +46,6 @@ class Solution:
                         
         return 0
 
-if endWord not in wordList:
-            return 0
-
-        def nextWords(word,visited):
-            for i in range(len(word)):
-                for char in string.ascii_lowercase:
-                    nextWord = word[:i] + char + word[i+1:]
-                    if nextWord in wordList and nextWord not in visited:
-                        yield nextWord
-
-        beginQueue, endQueue = deque([beginWord]), deque([endWord])
-        beginVisited, endVisited = set([beginWord]), set([endWord])
-
-        step = 1
-
-        while beginQueue and endQueue:
-            newQueue = beginQueue
-            beginQueue = deque([])
-            while newQueue:
-                word = newQueue.popleft()
-                for nextWord in nextWords(word,beginVisited):
-                    if nextWord in endQueue:
-                        return step+1
-
-                    beginQueue.append(nextWord)
-                    beginVisited.add(nextWord)
-            step += 1
-            beginQueue, endQueue = endQueue, beginQueue
-            beginVisited, endVisited = endVisited, beginVisited
-        return 0
-
-
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         if endWord not in wordList: return 0
@@ -107,4 +75,40 @@ class Solution:
             if len(endQ)<len(beginQ):
                 beginQ, endQ = endQ, beginQ
 
+        return 0
+
+
+
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        wordList = set(wordList)
+        if endWord not in wordList:
+            return 0
+
+        def nextWords(word,visited):
+            for i in range(len(word)):
+                for char in string.ascii_lowercase:
+                    nextWord = word[:i] + char + word[i+1:]
+                    if nextWord in wordList and nextWord not in visited:
+                        yield nextWord
+
+        beginQueue, endQueue = deque([beginWord]), deque([endWord])
+        beginVisited, endVisited = set([beginWord]), set([endWord])
+
+        step = 1
+
+        while beginQueue and endQueue:
+            newQueue = beginQueue
+            beginQueue = deque([])
+            while newQueue:
+                word = newQueue.popleft()
+                for nextWord in nextWords(word,beginVisited):
+                    if nextWord in endQueue:
+                        return step+1
+
+                    beginQueue.append(nextWord)
+                    beginVisited.add(nextWord)
+            step += 1
+            beginQueue, endQueue = endQueue, beginQueue
+            beginVisited, endVisited = endVisited, beginVisited
         return 0

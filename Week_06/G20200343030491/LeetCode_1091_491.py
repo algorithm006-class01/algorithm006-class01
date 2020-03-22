@@ -72,7 +72,7 @@ class Solution:
         return -1
 
 
-lass Solution:
+class Solution:
     def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
         if not grid or not grid[0]: return -1
         m = len(grid)
