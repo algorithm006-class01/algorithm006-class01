@@ -50,7 +50,7 @@ import java.util.Set;
 
 
 
-public class LeetCode_200_379 {
+public class LeetCode_200_379_1 {
     public static void main(String[] args) {
         /**
          * "hit"
