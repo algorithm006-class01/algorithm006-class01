@@ -1,0 +1,60 @@
+* 岛屿问题是在问什么？
+* 并查集
+两种实现方式：
+1. 我将其命名为 UnionFind，对应 Java 的模板
+#+begin_src java
+  class UnionFind {
+      int count = 0;
+      int[] parent;
+      public UnionFind(int n) {
+          count = n;
+          parent = new int[n];
+          for (int i = 0; i < n; i ++)
+              parent[i] = i;
+      }
+      public int find(int p) {
+          while (p != parent[p]) {
+              parent[p] = parent[parent[p]];
+              p = parent[p];
+          }
+          return p;
+      }
+      public void union(int p, int q) {
+          int rp = find(p);
+          int rq = find(q);
+          if (rp == rq) return;
+          parent[rp] = rq;
+          count --;
+      }
+  }
+#+end_src
+2. 我将其命名为 DisjointSet，对应 Python 的模板
+#+begin_src java
+  class DisjointSet {
+      int count;
+      int[] parent;
+      public DisjointSet(int n) {
+          count = n;
+          parent = new int[n];
+          for (int i = 0; i < n; i ++)
+              parent[i] = i;
+      }
+      public void union (int p, int q) {
+          int rp = find(p);
+          int rq = find(q);
+          parent[rp] = rq;
+          count --;
+      }
+      public int find (i) {
+          int root = i;
+          while (parent[root] != root)
+              root = parent[root];
+          while (parent[i] != i) {
+              int temp = i;
+              i = parent[i];
+              p[temp] = root;
+          }
+      }
+  }
+#+end_src
+DisjointSet 是绝对压缩。UnionFind 是隔代压缩，如 parent 为 [0, 0, 1, 2, 3] 的实例执行 find(4) 后，parent 被压缩为 [0, 0, 0, 2, 2]
