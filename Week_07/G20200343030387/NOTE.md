@@ -37,3 +37,12 @@ print (bf.lookup("yyj"))
 * 最近最少使用（读或写）的就放到最后，超出缓存大小限制时，淘汰掉最后的；
 * Hash Table(hash表) + Double Linkedlist(双向链表) 实现；
 * 查询O(1)，修改O(1)
+
+## 排序
+###  归并排序
+* 每次将数组分为左右两部分，分别排序后再merge；
+* merge需要额外的存储空间
+
+### 快速排序
+* 每次取priot，通过partition将数组分为左边小于priot的部分，右边大于priot的部分，最终整个数组有序；
+* partition的空间复杂度为O(1)
