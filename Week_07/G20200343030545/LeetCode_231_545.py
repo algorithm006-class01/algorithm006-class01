@@ -19,7 +19,7 @@
 
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
-        pass
+        return self.use_and(n)
 
     @classmethod
     def use_and(cls, n: int) -> bool:
@@ -28,3 +28,7 @@ class Solution:
             可以 用 n & (n-1) 打掉n最低位的一个1 判断这个结果是否等于0。
         """
         return n != 0 and n & (n - 1) == 0
+
+    @classmethod
+    def use_recursive(cls, n: int) -> bool:
+        return 0 if n <= 0 else 1 + cls.use_recursive(n & (n - 1))

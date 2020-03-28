@@ -23,7 +23,10 @@ class Solution:
     def solve_1(cls, n: int) -> int:
         res = 0
         for i in range(32):
+            # 先讲 res 左移一位腾出位置来
             res <<= 1
-            res += n & 1
+            # n & 1 表示 获取n 的最后1为二进制位，然后或上表示将这位 加到res上
+            res |= n & 1
+            # 因为n处理了最后一位 就可以打掉最后一位了
             n >>= 1
         return res

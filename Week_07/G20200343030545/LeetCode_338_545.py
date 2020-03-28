@@ -21,19 +21,28 @@ class Solution:
 
     @classmethod
     def use_iteration(cls, num: int) -> List[int]:
-        def helper(n):
-            cnt = 0
-            while n:
-                cnt += 1
-                n &= 1
-            return cnt
 
         nums = [0 for i in range(num + 1)]
-
         for i in range(num):
-            nums[i] = helper(i)
+            nums[i] = cls.helper(i)
         return nums
 
     @classmethod
     def use_dp(cls, num: int) -> List[int]:
-        pass
+        # https://leetcode-cn.com/problems/counting-bits/solution/dong-tai-gui-hua-wei-yun-suan-xing-zhi-python3-by-/
+
+        dp = [0] * (num + 1)
+        for i in range(1, num + 1, ):
+            if i % 2 == 1:
+                dp[i] = dp[i - 1] + 2
+            else:
+                dp[i] = dp[i // 2]
+        return dp
+
+    @classmethod
+    def helper(cls, n: int) -> int:
+        res = 0
+        while n:
+            res += 1
+            n &= n - 1
+        return res

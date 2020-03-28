@@ -23,26 +23,28 @@ from typing import List
 
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        return self.use_dfs(n)
+        res = self.use_dfs(n)
+        print(res)
+        return [["." * col + "Q" + "." * (n - col - 1) for col in row] for row in res]
 
     @classmethod
-    def use_dfs(cls, n: int) -> List[List[str]]:
-        """
-            一行只有一个皇后 且一列也只有一个皇后
-            所以可以按列来循环，没有必须要循环棋盘的所有方格。
-            然后 row+col  == pie   row + col = na
-
-        """
+    def use_dfs(cls, n: int):
         res = []
 
-        def helper(cols, xy_diff, xy_sum):
-            if len(cols) == n:
-                res.append(cols)
+        def helper(queue, xy_sum, xy_diff):
+            if len(queue) == n:
+                res.append(queue)
+                return
 
-            row = len(cols)
+            row = len(queue)
+
             for col in range(n):
-                if col not in cols and row - col not in xy_diff and row + col not in xy_sum:
-                    helper(cols + [col], xy_diff + [row - col], xy_sum + [row + col])
+                if col not in queue and row - col not in xy_diff and row + col not in xy_sum:
+                    helper(queue + [col], xy_sum + [row + col], xy_diff + [row - col])
 
         helper([], [], [])
         return res
+
+
+if __name__ == '__main__':
+    print(Solution().solveNQueens(4))
