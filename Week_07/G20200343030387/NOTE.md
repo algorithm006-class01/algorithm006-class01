@@ -195,9 +195,9 @@ function swap(arr, i, j) {
     arr[j] = tmp
 }
 
-// 测试用例
 const assert = require('assert')
-const sortFn = [selectSort, insertSort, bubbleSort, quickSort, mergeSort, heapSort]
+const sortFn = [insertSort, selectSort, bubbleSort, quickSort, mergeSort, heapSort]
+// const sortFn = [insertSort]
 const randomArr = Array(1000).fill(0).map(i => parseInt(Math.random() * 1000))
 const testTasks = [
     {
@@ -219,7 +219,7 @@ const testTasks = [
 for (let fn of sortFn) {
     console.time(`${fn.name}`)
     for (let t of testTasks) {
-        assert.deepStrictEqual(fn(t.input, 0, t.input.length - 1), t.output)
+        assert.deepStrictEqual(fn(t.input.slice(0), 0, t.input.length - 1), t.output)
     }
     console.timeEnd(`${fn.name}`)
 }
@@ -227,12 +227,12 @@ for (let fn of sortFn) {
 ```
 
 * 日志输出
-* selectSort: 4.177ms
-* insertSort: 0.154ms
-* bubbleSort: 2.067ms
-* quickSort: 3.642ms
-* mergeSort: 2.425ms
-* heapSort: 1.802ms
+* insertSort: 0.993ms
+* selectSort: 3.574ms
+* bubbleSort: 2.501ms
+* quickSort: 3.911ms
+* mergeSort: 1.629ms
+* heapSort: 1.944ms
 
 这里有个不懂的地方，快排、归并居然比插入要慢不少，而且数组更长的时候，差别更明显。
 时间复杂度来看，快排、归并肯定比插入要快，但考虑js的语言动态特性，对于递归会不会消耗更多的其它资源，导致处理更慢？
