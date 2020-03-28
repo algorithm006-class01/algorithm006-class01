@@ -154,8 +154,50 @@ function merge(arr, mid, start, end) {
     }
 }
 
+// 堆排序
+// 1. 构建大顶堆
+// 2. 不断从堆顶取出元素与堆尾互换，再排除堆尾调整堆
+// 3. 递归执行2，直到堆为空
+function heapSort(arr) {
+    const length = arr.length
+    if (length < 1) return arr
+
+    // 构建大顶堆
+    for (let i = parseInt(length / 2) - 1; i >= 0; i--) {
+        heapify(arr, length, i)
+    }
+
+    // 步骤2，3
+    for (let j = length - 1; j >= 0; j--) {
+        swap(arr, 0, j)
+        heapify(arr, j, 0)
+    }
+    return arr
+}
+function heapify(arr, length, i) {
+    let largest = i
+    let left = 2 * i + 1
+    let right = 2 * i + 2
+    if (left < length && arr[left] > arr[largest]) {
+        largest = left
+    }
+    if (right < length && arr[right] > arr[largest]) {
+        largest = right
+    }
+    if (largest !== i) {
+        swap(arr, i, largest)
+        heapify(arr, length, largest)
+    }
+}
+function swap(arr, i, j) {
+    const tmp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = tmp
+}
+
+// 测试用例
 const assert = require('assert')
-const sortFn = [selectSort, insertSort, bubbleSort, quickSort, mergeSort]
+const sortFn = [selectSort, insertSort, bubbleSort, quickSort, mergeSort, heapSort]
 const randomArr = Array(1000).fill(0).map(i => parseInt(Math.random() * 1000))
 const testTasks = [
     {
@@ -182,12 +224,15 @@ for (let fn of sortFn) {
     console.timeEnd(`${fn.name}`)
 }
 
-// selectSort: 4.468ms
-// insertSort: 0.173ms
-// bubbleSort: 2.124ms
-// quickSort: 3.925ms
-// mergeSort: 2.483ms
 ```
+
+* 日志输出
+* selectSort: 4.177ms
+* insertSort: 0.154ms
+* bubbleSort: 2.067ms
+* quickSort: 3.642ms
+* mergeSort: 2.425ms
+* heapSort: 1.802ms
 
 这里有个不懂的地方，快排、归并居然比插入要慢不少，而且数组更长的时候，差别更明显。
 时间复杂度来看，快排、归并肯定比插入要快，但考虑js的语言动态特性，对于递归会不会消耗更多的其它资源，导致处理更慢？
