@@ -51,7 +51,7 @@ package main
 
 	最终结果应该不难想到，是最后一天中两种可能的最大值：Max(dp[n-1][0], dp[n-1][1])
 */
-/*
+
 func rob(nums []int) int {
 	if nums == nil || len(nums) == 0 {
 		return 0
@@ -82,7 +82,7 @@ func make2dSlice(i, j int) [][]int {
 
 	return sl
 }
- */
+
 /*
 	将二维dp数组优化为一维dp数组
 	dp[i] = Max(dp[i-1], dp[i-2] + nums[i])
@@ -109,7 +109,7 @@ func make2dSlice(i, j int) [][]int {
 		以下是“啰嗦版”的代码，供大家参考。比较值得注意的是对dp[1]的初始化赋值
 */
 
-/* func rob1(nums []int) int {
+func rob1(nums []int) int {
 	if nums == nil {
 		return 0
 	}
@@ -159,7 +159,7 @@ func rob(nums []int) int {
 	}
 
 	return dp[n-1]
-} */
+}
 
 /* func main() {
 	nums := []int{1, 3, 1}
