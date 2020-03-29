@@ -16,7 +16,7 @@ public class LeetCode_242_379 {
         }
         //leetcode submit region begin(Prohibit modification and deletion)
         class Solution {
-            //哈希升级法
+            //哈希升级法  实际是计数排序
             public boolean isAnagram(String s, String t) {
                 if(s.length()!=t.length()){
                     return false;
@@ -35,7 +35,7 @@ public class LeetCode_242_379 {
                 }
                 return true;
             }
-            //哈希法
+            //哈希法  实际是计数排序
             public boolean isAnagram3(String s, String t) {
                 if(s.length()!=t.length()){
                     return false;

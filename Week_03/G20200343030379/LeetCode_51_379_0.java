@@ -1,14 +1,8 @@
 package G20200343030379;
 
 
-import com.sun.xml.internal.bind.v2.TODO;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Stack;
 
 /**
  * 51. N皇后
@@ -39,11 +33,11 @@ import java.util.Stack;
  *
  * 参考优秀题解：
  */
-public class LeetCode_51_379 {
+public class LeetCode_51_379_0 {
     public static void main(String[] args) {
-       List<List<String>> strings = new LeetCode_51_379().solveNQueens(4);
+       List<List<String>> strings = new LeetCode_51_379_0().solveNQueens(4);
         System.out.println(strings);
-       new LeetCode_51_379().construct(new char[][]{{'1','2'}});
+       new LeetCode_51_379_0().construct(new char[][]{{'1','2'}});
 
 
     }
