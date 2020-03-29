@@ -1,6 +1,6 @@
 //照搬官方的解释，主要是在学习Java的map的使用
 class Solution {
-    public int[] twoSum(int[] nums, int target) {
+    publit[] twoSum(int[] nums, int target) {
         // Map构建方法为Map<键类型, 值类型> 变量名 = new HashMap<>();
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
