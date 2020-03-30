@@ -37,7 +37,7 @@ import java.util.List;
  */
 public class LeetCode_51_379_2 {
     public static void main(String[] args) {
-       List<List<String>> strings = new LeetCode_51_379_2().solveNQueens(4);
+       List<List<String>> strings = new LeetCode_51_379_3().solveNQueens(4);
         System.out.println(strings);
        new LeetCode_51_379_2().construct(new char[][]{{'1','2'}});
 
@@ -102,7 +102,9 @@ public class LeetCode_51_379_2 {
      */
     private boolean validate(char[][] broad, int row, int col) {
         //校验所有行的当前列，是否存在皇后  i == col,不能用这里传进来的col，因为是会变的
-        for (int i = 0; i < broad.length; i++) {
+        //broad.length 其实可以改为 row，因为下面的肯定是空的数据，不可能存在攻击范围
+        //for (int i = 0; i < broad.length; i++) {
+        for (int i = 0; i < row; i++) {
             if(broad[i][col]=='Q'){
                 return false;
             }
