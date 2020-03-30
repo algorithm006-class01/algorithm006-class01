@@ -24,14 +24,42 @@ from typing import List
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        return self.bfs(grid)
+        return self.dis_join_set(grid)
 
     @classmethod
     def dis_join_set(cls, grid: List[List[str]]) -> int:
         """
             并查集
         """
-        pass
+        row_len = len(grid)
+        col_len = len(grid[0]) if row_len else 0
+        count = sum([grid[i][j] == '1' for j in range(col_len) for i in range(row_len)])
+        parent = [i for i in range(row_len * col_len)]
+
+        def union(p, e1, e2):
+            p1 = find(p, e1)
+            p2 = find(p, e2)
+            if p1 == p2:
+                return
+            p[p1] = p2
+            nonlocal count
+            count -= 1
+
+        def find(p, e):
+            while e != p[e]:
+                e = p[e]
+            return p[e]
+
+        for i in range(row_len):
+            for j in range(col_len):
+                if grid[i][j] == "0":
+                    continue
+                index = i * col_len + j
+                if j < col_len - 1 and grid[i][j + 1] == "1":
+                    union(parent, index, index + 1)
+                if i < row_len - 1 and grid[i + 1][j] == "1":
+                    union(parent, index, index + col_len)
+        return count
 
     @classmethod
     def bfs(cls, grid: List[List[str]]) -> int:
