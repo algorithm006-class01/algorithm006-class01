@@ -45,6 +45,15 @@ public class LeetCode_493_379_2 {
         return mergeSort(nums,0,nums.length-1);
     }
 
+    /**
+     * 覃超老师 17:50 开始讲
+     * 时间复杂度：arrays.sort排序*统计   n(logN) * logN
+     * 时间复杂度：归并排序*统计     O(N) * logN
+     * @param nums
+     * @param left
+     * @param right
+     * @return
+     */
     private int mergeSort(int[] nums, int left, int right) {
         if(left>=right) return 0;
         int mid=(left+right)/2;
@@ -58,7 +67,10 @@ public class LeetCode_493_379_2 {
             cnt+=j-(mid+1);
         }
 
+        //时间复杂度 n（logn）
         Arrays.sort(nums,left,right+1);
+
+        //如果是归并排序的是 O(N)
         return cnt;
     }
 
