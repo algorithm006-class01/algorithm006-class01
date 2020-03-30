@@ -1,0 +1,27 @@
+class LRUCache {
+    LinkedHashMap map;
+    public LRUCache(int capacity) {
+        map = new LinkedHashMap(16,0.75f,true){
+            @Override
+            protected boolean removeEldestEntry(Map.Entry eldest) {
+                return size()>capacity;
+            }
+        };
+    }
+    
+    public int get(int key) {
+        if(map.containsKey(key)) return (Integer)map.get(key);
+        return -1;
+    }
+    
+    public void put(int key, int value) {
+        map.put(key,value);
+    }
+}
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
