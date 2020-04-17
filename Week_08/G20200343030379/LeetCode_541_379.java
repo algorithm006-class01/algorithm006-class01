@@ -66,4 +66,27 @@ public class LeetCode_541_379 {
 
     }
 
+
+    /**
+     * 执行用时 : 1 ms , 在所有 Java 提交中击败了 97.73% 的用户
+     * 内存消耗 : 39.7 MB , 在所有 Java 提交中击败了 6.35% 的用户
+     * @param s
+     * @param k
+     * @return
+     */
+    public String reverseStr2(String s, int k) {
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i=k*2+i) {
+            int start=i;
+            int end=Math.min(chars.length-1,k+i-1);
+
+            while (start<end){
+                char temp=chars[end];
+                chars[end--]=chars[start];
+                chars[start++]=temp;
+            }
+        }
+        return new String(chars);
+    }
+
 }
