@@ -1,0 +1,56 @@
+// 146. LRU缓存机制
+// 方式一 使用C++ list 双链表实现 LRU Cache
+class LRUCache {
+    int capacity;
+    struct Node {
+        int key;
+        int value;
+    };
+    list<Node> list;
+public:
+    LRUCache(int capacity) {
+        this->capacity = capacity;
+    }
+    
+    int get(int key) {
+        auto it = list.begin();
+        for(; it != list.end(); it++) {
+            if(it->key == key) {
+                break;
+            }
+        }
+        if(it != list.end()) {
+            Node temp = *it;
+            list.erase(it);
+            list.push_front(temp);
+            return temp.value;
+        }
+        return -1;
+    }
+    
+    void put(int key, int value) {
+        Node temp;
+        temp.key = key;
+        temp.value = value;
+        int size = list.size();
+        auto it = list.begin();
+        for(; it != list.end(); it++) {
+            if(it->key == key) {
+                break;
+            }
+        }
+        if(it != list.end()) {
+            list.erase(it);
+            list.push_front(temp);   
+        }
+        else {
+            if(size == capacity) {
+                list.pop_back();
+                list.push_front(temp);
+            }
+            else {
+                list.push_front(temp);
+            }
+        }
+    }
+};
