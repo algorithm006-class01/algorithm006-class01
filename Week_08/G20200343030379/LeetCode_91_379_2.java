@@ -1,4 +1,7 @@
 package G20200343030379;
+
+import java.util.Arrays;
+
 /**
  * 91. 解码方法
  *
@@ -26,10 +29,9 @@ package G20200343030379;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  *
  */
-public class LeetCode_91_379 {
+public class LeetCode_91_379_2 {
     public static void main(String[] args) {
-        new LeetCode_91_379().numDecodings2("100");
-        //new LeetCode_91_379().numDecodings2("126");
+        new LeetCode_91_379_2().numDecodings2("126");
     }
     //动态规划 从右到左
     /**
@@ -60,20 +62,24 @@ public class LeetCode_91_379 {
      *
      *
      * 执行用时 : 1 ms , 在所有 Java 提交中击败了 100.00% 的用户
-     * 内存消耗 : 38.1 MB , 在所有 Java 提交中击败了 5.01% 的用户
+     * 内存消耗 : 38.1 MB , 在所有 Java 提交中击败了 6.67% 的用户
      *
      * 参考题解：https://leetcode-cn.com/problems/decode-ways/solution/java-di-gui-dong-tai-gui-hua-kong-jian-ya-suo-by-r/
      * https://leetcode.com/problems/decode-ways/discuss/30357/DP-Solution-(Java)-for-reference
      * @param s
      * @return
      */
+    /**
+     *    126
+     * dp:3211
+     *
+     *    326
+     * dp:2211
+     */
     public int numDecodings(String s) {
-        int[] dp=new int[s.length()+1];
-
-        //辅助数字
+        //增加一个临时位,固定值为1
+        int dp[]=new int[s.length()+1];
         dp[s.length()]=1;
-        //初始最后的字符
-
 
         if(s.charAt(s.length()-1)=='0'){
             dp[s.length()-1]=0;
@@ -81,21 +87,22 @@ public class LeetCode_91_379 {
             dp[s.length()-1]=1;
         }
 
-
-        for (int i = s.length()-2; i >= 0; i--) {
+        //从右往左
+        for (int i = s.length()-2; i >=0; i--) {
+            //判断是否0
             //问题场景 "00" ,输出0
             if(s.charAt(i)=='0'){
-                dp[i]=0;
+                dp[i] = 0;
                 continue;
             }
 
-            //小于26
-            if((s.charAt(i)-'0')*10+(s.charAt(i+1)-'0')<=26){
-                dp[i]=dp[i+1]+dp[i+2];
+            //>=26
+            if((s.charAt(i)-'0')*10 + (s.charAt(i+1)-'0') <=26){
+                dp[i] = dp[i+2] + dp[i+1];
             }else{
-                dp[i]=dp[i+1];
-                //System.out.println("==");
+                dp[i] = dp[i+1];
             }
+
         }
         return dp[0];
     }
@@ -118,41 +125,47 @@ public class LeetCode_91_379 {
      * 参考题解：https://leetcode.com/problems/decode-ways/discuss/30358/Java-clean-DP-solution-with-explanation
      *
      * 执行用时 : 1 ms , 在所有 Java 提交中击败了 100.00% 的用户
-     * 内存消耗 : 38.4 MB , 在所有 Java 提交中击败了 5.01% 的用户
+     * 内存消耗 : 38 MB , 在所有 Java 提交中击败了 6.67% 的用户
      * @param s
      * @return
      */
+    /**
+     *     126
+     * dp:1123
+     *
+     *     326
+     * dp:1112
+     *
+     *     306
+     * dp:1111
+     */
     public int numDecodings2(String s) {
-        int[] dp=new int[s.length()+1];
-
-        //辅助数字
+        int dp[]=new int[s.length()+1];
+        //初始化
         dp[0]=1;
-        //初始最后的字符
-
-
-        //如果第一个0，非法
         if(s.charAt(0)=='0'){
             dp[1]=0;
         }else{
             dp[1]=1;
         }
 
+        //从左往右
+        //i <= s.length() 应用场景：两位数的情况 13
         for (int i = 2; i <= s.length(); i++) {
-           /* 没想到这段注释在leetcode会影响时间复杂度，这段注释到导致时间复杂度加1ms
-            if(s.charAt(i-1)=='0'){
-                dp[i]=dp[i-1];
-                continue;
-            }*/
-            if(s.charAt(i-1)-'0'>=1 && (s.charAt(i-1)-'0')<=9){
-                dp[i]=dp[i]+dp[i-1];
+
+            if((s.charAt(i-1)-'0')!=0){
+                dp[i] = dp[i-1];
             }
 
-            int send=(s.charAt(i-2)-'0')*10+(s.charAt(i-1)-'0');
-            if(send>=10 && send<=26){
-                dp[i]=dp[i]+dp[i-2];
+            int ten= (s.charAt(i-2)-'0') * 10 + (s.charAt(i-1)-'0');
+            if(ten>=10 && ten<=26){
+                dp[i] =dp[i] + dp[i-2];
             }
 
         }
+        //System.out.println(Arrays.toString(dp));
+
         return dp[s.length()];
     }
+
 }
