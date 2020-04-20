@@ -1,0 +1,47 @@
+// 191. 位1的个数
+// 编写一个函数，输入是一个无符号整数，返回其二进制表达式中字位数为 ‘1’ 的个数
+class Solution {
+public:
+	// 方式一 统计 n % 2 == 1 的个数
+    int hammingWeight(uint32_t n) {
+		int counter = 0;
+		while(n != 0) {
+			if(n % 2 == 1) {
+				counter++;
+			}
+			n = n >> 1;
+		}
+		return counter;
+    }
+	// 方式二 遍历每一位和位1求与，统计不为0的个数
+	int hammingWeight_2(uint32_t n) {
+		int counter = 0;
+		uint32_t onebit = 1;
+		for(int i = 0; i < 32; i++) {
+			if((n & onebit) != 0) {
+				counter++;
+			}
+			onebit <<= 1;
+		}
+		return counter;
+	}
+	// 方式三 n & (n-1) 
+	/*
+	8 1000
+			& -> 0 有1个1
+	7 0111
+
+	15 01111			01110				01100				01000
+			& -> 01110 			& -> 01100			& -> 01000 			& -> 0 有4个1
+	14 01110			01101				01011				00111
+	*/
+	int hammingWeight_3(uint32_t n) {
+		int counter = 0;
+		while(n != 0) {
+			counter++;
+			n &= n - 1;
+		}
+		return counter;
+	}
+};
+
